@@ -19,6 +19,11 @@ class PendaftaranController extends Controller
         $query->where('status', $request->status);
     }
 
+    // Filter history (sudah diproses)
+    if ($request->has('history') && $request->history == 'true') {
+        $query->whereIn('status', ['diterima', 'ditolak']);
+    }
+
     // Search functionality
     if ($request->has('search') && $request->search != '') {
         $search = $request->search;
@@ -40,6 +45,7 @@ class PendaftaranController extends Controller
         'menunggu' => Pendaftaran::where('status', 'menunggu')->count(),
         'diterima' => Pendaftaran::where('status', 'diterima')->count(),
         'ditolak' => Pendaftaran::where('status', 'ditolak')->count(),
+        'history' => Pendaftaran::whereIn('status', ['diterima', 'ditolak'])->count(),
     ];
         
     return view('admin.pendaftaran.index', compact('pendaftaran', 'stats'));

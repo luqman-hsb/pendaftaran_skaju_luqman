@@ -72,46 +72,96 @@
     </div>
 
     <!-- Filter Tabs dan Search -->
-    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4 mb-6">
-        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-            <!-- Filter Tabs -->
-            <div class="flex space-x-1 bg-gray-100 p-1 rounded-lg">
-                <a href="{{ request()->fullUrlWithQuery(['status' => '']) }}" 
-                   class="px-4 py-2 rounded-lg text-sm font-medium transition duration-200 {{ !request('status') ? 'bg-white text-blue-600 shadow-sm' : 'text-gray-600 hover:text-gray-800' }}">
-                    Semua ({{ $pendaftaran->total() }})
-                </a>
-                <a href="{{ request()->fullUrlWithQuery(['status' => 'menunggu']) }}" 
-                   class="px-4 py-2 rounded-lg text-sm font-medium transition duration-200 {{ request('status') == 'menunggu' ? 'bg-yellow-100 text-yellow-800 shadow-sm' : 'text-gray-600 hover:text-gray-800' }}">
-                    Menunggu ({{ $stats['menunggu'] ?? 0 }})
-                </a>
-                <a href="{{ request()->fullUrlWithQuery(['status' => 'diterima']) }}" 
-                   class="px-4 py-2 rounded-lg text-sm font-medium transition duration-200 {{ request('status') == 'diterima' ? 'bg-green-100 text-green-800 shadow-sm' : 'text-gray-600 hover:text-gray-800' }}">
-                    Diterima ({{ $stats['diterima'] ?? 0 }})
-                </a>
-                <a href="{{ request()->fullUrlWithQuery(['status' => 'ditolak']) }}" 
-                   class="px-4 py-2 rounded-lg text-sm font-medium transition duration-200 {{ request('status') == 'ditolak' ? 'bg-red-100 text-red-800 shadow-sm' : 'text-gray-600 hover:text-gray-800' }}">
-                    Ditolak ({{ $stats['ditolak'] ?? 0 }})
-                </a>
-            </div>
+<div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4 mb-6">
+    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+        <!-- Filter Tabs -->
+        <div class="flex flex-wrap gap-2">
+            <a href="{{ request()->fullUrlWithQuery(['status' => '', 'history' => '']) }}" 
+               class="px-4 py-2 rounded-lg text-sm font-medium transition duration-200 {{ !request('status') && !request('history') ? 'bg-blue-500 text-white shadow-sm' : 'bg-gray-100 text-gray-600 hover:text-gray-800' }}">
+                Semua ({{ $pendaftaran->total() }})
+            </a>
+            <a href="{{ request()->fullUrlWithQuery(['status' => 'menunggu', 'history' => '']) }}" 
+               class="px-4 py-2 rounded-lg text-sm font-medium transition duration-200 {{ request('status') == 'menunggu' ? 'bg-yellow-500 text-white shadow-sm' : 'bg-gray-100 text-gray-600 hover:text-gray-800' }}">
+                Menunggu ({{ $stats['menunggu'] ?? 0 }})
+            </a>
+            <a href="{{ request()->fullUrlWithQuery(['status' => 'diterima', 'history' => '']) }}" 
+               class="px-4 py-2 rounded-lg text-sm font-medium transition duration-200 {{ request('status') == 'diterima' ? 'bg-green-500 text-white shadow-sm' : 'bg-gray-100 text-gray-600 hover:text-gray-800' }}">
+                Diterima ({{ $stats['diterima'] ?? 0 }})
+            </a>
+            <a href="{{ request()->fullUrlWithQuery(['status' => 'ditolak', 'history' => '']) }}" 
+               class="px-4 py-2 rounded-lg text-sm font-medium transition duration-200 {{ request('status') == 'ditolak' ? 'bg-red-500 text-white shadow-sm' : 'bg-gray-100 text-gray-600 hover:text-gray-800' }}">
+                Ditolak ({{ $stats['ditolak'] ?? 0 }})
+            </a>
+            <!-- New History Filter -->
+            <a href="{{ request()->fullUrlWithQuery(['history' => 'true', 'status' => '']) }}" 
+               class="px-4 py-2 rounded-lg text-sm font-medium transition duration-200 {{ request('history') == 'true' ? 'bg-purple-500 text-white shadow-sm' : 'bg-gray-100 text-gray-600 hover:text-gray-800' }}">
+                <i class="fas fa-history mr-1"></i> History ({{ $stats['history'] ?? 0 }})
+            </a>
+        </div>
 
-            <!-- Search -->
-            <div class="flex-1 max-w-md">
-                <form action="{{ route('admin.pendaftaran.index') }}" method="GET">
-                    <div class="relative">
-                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <i class="fas fa-search text-gray-400"></i>
-                        </div>
-                        <input type="text" name="search" value="{{ request('search') }}" 
-                               class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
-                               placeholder="Cari siswa atau IDUKA...">
-                        @if(request('status'))
-                            <input type="hidden" name="status" value="{{ request('status') }}">
-                        @endif
+        <!-- Search -->
+        <div class="flex-1 max-w-md">
+            <form action="{{ route('admin.pendaftaran.index') }}" method="GET">
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i class="fas fa-search text-gray-400"></i>
                     </div>
-                </form>
-            </div>
+                    <input type="text" name="search" value="{{ request('search') }}" 
+                           class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
+                           placeholder="Cari siswa atau IDUKA...">
+                    <!-- Hidden fields to preserve filters -->
+                    @if(request('status'))
+                        <input type="hidden" name="status" value="{{ request('status') }}">
+                    @endif
+                    @if(request('history'))
+                        <input type="hidden" name="history" value="{{ request('history') }}">
+                    @endif
+                </div>
+            </form>
         </div>
     </div>
+
+    <!-- Active Filters Info -->
+    @if(request('status') || request('history') || request('search'))
+        <div class="mt-4 pt-4 border-t border-gray-200">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <span class="text-sm text-gray-600">Filter aktif:</span>
+                    @if(request('status'))
+                        <span class="inline-flex items-center px-2 py-1 rounded text-xs font-medium 
+                            {{ request('status') == 'menunggu' ? 'bg-yellow-100 text-yellow-800' : '' }}
+                            {{ request('status') == 'diterima' ? 'bg-green-100 text-green-800' : '' }}
+                            {{ request('status') == 'ditolak' ? 'bg-red-100 text-red-800' : '' }}">
+                            {{ ucfirst(request('status')) }}
+                            <a href="{{ request()->fullUrlWithQuery(['status' => null]) }}" class="ml-1 text-gray-500 hover:text-gray-700">
+                                <i class="fas fa-times"></i>
+                            </a>
+                        </span>
+                    @endif
+                    @if(request('history') == 'true')
+                        <span class="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-purple-100 text-purple-800">
+                            History
+                            <a href="{{ request()->fullUrlWithQuery(['history' => null]) }}" class="ml-1 text-gray-500 hover:text-gray-700">
+                                <i class="fas fa-times"></i>
+                            </a>
+                        </span>
+                    @endif
+                    @if(request('search'))
+                        <span class="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-blue-100 text-blue-800">
+                            Pencarian: "{{ request('search') }}"
+                            <a href="{{ request()->fullUrlWithQuery(['search' => null]) }}" class="ml-1 text-gray-500 hover:text-gray-700">
+                                <i class="fas fa-times"></i>
+                            </a>
+                        </span>
+                    @endif
+                </div>
+                <a href="{{ route('admin.pendaftaran.index') }}" class="text-sm text-blue-500 hover:text-blue-600">
+                    <i class="fas fa-times mr-1"></i> Clear semua
+                </a>
+            </div>
+        </div>
+    @endif
+</div>
 
     <!-- Table -->
     <div class="bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden">

@@ -183,51 +183,53 @@
                     </div>
 
                     <!-- Pendaftaran Ditangani -->
-                    <div class="bg-white rounded-xl shadow-md border border-gray-200">
-                        <div class="px-6 py-4 border-b border-gray-200">
-                            <h2 class="text-lg font-semibold text-gray-800 flex items-center">
-                                <i class="fas fa-user-check mr-2 text-green-500"></i>
-                                Pendaftaran Ditangani oleh Anda
-                            </h2>
-                        </div>
-                        <div class="p-6">
-                            @forelse($pendaftaranDitangani as $pendaftaran)
-                                <div class="flex items-center justify-between py-3 border-b border-gray-100 last:border-b-0">
-                                    <div class="flex-1">
-                                        <p class="font-medium text-gray-800">{{ $pendaftaran->siswa->nama_lengkap }}</p>
-                                        <p class="text-sm text-gray-600">{{ $pendaftaran->iduka->nama_iduka }}</p>
-                                        <p class="text-xs text-gray-500">{{ $pendaftaran->updated_at->diffForHumans() }}</p>
-                                    </div>
-                                    @if($pendaftaran->status == 'diterima')
-                                        <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-medium">
-                                            Diterima
-                                        </span>
-                                    @elseif($pendaftaran->status == 'ditolak')
-                                        <span class="bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs font-medium">
-                                            Ditolak
-                                        </span>
-                                    @else
-                                        <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs font-medium">
-                                            Menunggu
-                                        </span>
-                                    @endif
-                                </div>
-                            @empty
-                                <div class="text-center py-8 text-gray-500">
-                                    <i class="fas fa-user-clock text-3xl mb-3"></i>
-                                    <p>Belum ada pendaftaran yang ditangani.</p>
-                                </div>
-                            @endforelse
-                            
-                            @if($pendaftaranDitangani->count() > 0)
-                                <div class="mt-4 text-center">
-                                    <a href="#" class="text-blue-500 hover:text-blue-600 font-medium text-sm">
-                                        Lihat Riwayat Lengkap →
-                                    </a>
-                                </div>
-                            @endif
-                        </div>
-                    </div>
+<div class="bg-white rounded-xl shadow-md border border-gray-200">
+    <div class="px-6 py-4 border-b border-gray-200">
+        <h2 class="text-lg font-semibold text-gray-800 flex items-center">
+            <i class="fas fa-user-check mr-2 text-green-500"></i>
+            Pendaftaran Ditangani oleh Anda
+        </h2>
+    </div>
+    <div class="p-6">
+        @forelse($pendaftaranDitangani as $pendaftaran)
+            <div class="flex items-center justify-between py-3 border-b border-gray-100 last:border-b-0">
+                <div class="flex-1">
+                    <p class="font-medium text-gray-800">{{ $pendaftaran->siswa->nama_lengkap }}</p>
+                    <p class="text-sm text-gray-600">{{ $pendaftaran->iduka->nama_iduka }}</p>
+                    <p class="text-xs text-gray-500">{{ $pendaftaran->updated_at->diffForHumans() }}</p>
+                </div>
+                @if($pendaftaran->status == 'diterima')
+                    <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-medium">
+                        Diterima
+                    </span>
+                @elseif($pendaftaran->status == 'ditolak')
+                    <span class="bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs font-medium">
+                        Ditolak
+                    </span>
+                @else
+                    <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs font-medium">
+                        Menunggu
+                    </span>
+                @endif
+            </div>
+        @empty
+            <div class="text-center py-8 text-gray-500">
+                <i class="fas fa-user-clock text-3xl mb-3"></i>
+                <p>Belum ada pendaftaran yang ditangani.</p>
+            </div>
+        @endforelse
+        
+        @if($pendaftaranDitangani->count() > 0)
+            <div class="mt-4 text-center">
+                <a href="{{ route('admin.pendaftaran.index', ['history' => 'true']) }}" 
+                   class="inline-flex items-center text-blue-500 hover:text-blue-600 font-medium text-sm">
+                    Lihat Riwayat Lengkap
+                    <i class="fas fa-arrow-right ml-1"></i>
+                </a>
+            </div>
+        @endif
+    </div>
+</div>
                 </div>
 
                 <!-- Quick Actions -->
