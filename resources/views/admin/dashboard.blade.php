@@ -46,10 +46,6 @@
                 Manajemen Petugas
             </a>
         @endif
-        <a href="#" class="flex items-center px-4 py-3 text-blue-200 hover:bg-blue-700 rounded-lg transition duration-200">
-            <i class="fas fa-cog mr-3"></i>
-            Pengaturan
-        </a>
     </div>
 </nav>
         </div>

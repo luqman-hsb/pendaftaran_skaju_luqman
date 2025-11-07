@@ -10,11 +10,41 @@ use Illuminate\Validation\Rule;
 
 class SiswaController extends Controller
 {
-    public function index()
-    {
-        $siswa = Siswa::latest()->paginate(10);
-        return view('admin.siswa.index', compact('siswa'));
+    public function index(Request $request)
+{
+    $query = Siswa::query();
+
+    // Search functionality
+    if ($request->has('search') && $request->search != '') {
+        $search = $request->search;
+        $query->where(function($q) use ($search) {
+            $q->where('nama_lengkap', 'like', "%{$search}%")
+              ->orWhere('nis', 'like', "%{$search}%")
+              ->orWhere('kelas', 'like', "%{$search}%")
+              ->orWhere('jurusan', 'like', "%{$search}%")
+              ->orWhere('email', 'like', "%{$search}%");
+        });
     }
+
+    $siswa = $query->latest()->paginate(10);
+
+    // Stats for counters - PERBAIKAN DI SINI
+    $stats = [
+        'aktif_pkl' => Siswa::whereHas('pendaftaran', function($q) {
+            $q->where('status', 'diterima')
+              ->whereNotNull('tanggal_berlaku')
+              ->where('tanggal_berlaku', '>', now());
+        })->count(),
+        
+        'menunggu_pkl' => Siswa::whereHas('pendaftaran', function($q) {
+            $q->where('status', 'menunggu');
+        })->count(),
+        
+        'jurusan_unik' => Siswa::whereNotNull('jurusan')->distinct()->count('jurusan'),
+    ];
+
+    return view('admin.siswa.index', compact('siswa', 'stats'));
+}
 
     public function create()
     {

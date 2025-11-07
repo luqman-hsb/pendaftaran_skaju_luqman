@@ -4,8 +4,14 @@
 
 @section('content')
 <div class="p-6">
-    <div class="flex justify-between items-center mb-6">
-        <h1 class="text-2xl font-bold text-gray-800">Manajemen Pendaftaran PKL</h1>
+    <!-- Header dengan Back to Dashboard -->
+    <div class="flex items-center justify-between mb-6">
+        <div class="flex items-center">
+            <a href="{{ route('admin.dashboard') }}" class="flex items-center text-blue-500 hover:text-blue-600 mr-4 transition duration-200">
+                <i class="fas fa-arrow-left mr-2"></i> Back to Dashboard
+            </a>
+            <h1 class="text-2xl font-bold text-gray-800">Manajemen Pendaftaran PKL</h1>
+        </div>
     </div>
 
     @if(session('success'))
@@ -17,25 +23,93 @@
         </div>
     @endif
 
-    <!-- Filter Tabs -->
+    <!-- Stats -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+            <div class="flex items-center">
+                <div class="p-2 bg-blue-100 rounded-lg mr-3">
+                    <i class="fas fa-clipboard-list text-blue-500"></i>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-600">Total</p>
+                    <p class="text-xl font-bold text-gray-800">{{ $pendaftaran->total() }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+            <div class="flex items-center">
+                <div class="p-2 bg-yellow-100 rounded-lg mr-3">
+                    <i class="fas fa-clock text-yellow-500"></i>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-600">Menunggu</p>
+                    <p class="text-xl font-bold text-gray-800">{{ $stats['menunggu'] ?? 0 }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+            <div class="flex items-center">
+                <div class="p-2 bg-green-100 rounded-lg mr-3">
+                    <i class="fas fa-check text-green-500"></i>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-600">Diterima</p>
+                    <p class="text-xl font-bold text-gray-800">{{ $stats['diterima'] ?? 0 }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+            <div class="flex items-center">
+                <div class="p-2 bg-red-100 rounded-lg mr-3">
+                    <i class="fas fa-times text-red-500"></i>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-600">Ditolak</p>
+                    <p class="text-xl font-bold text-gray-800">{{ $stats['ditolak'] ?? 0 }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filter Tabs dan Search -->
     <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4 mb-6">
-        <div class="flex space-x-4">
-            <a href="{{ request()->fullUrlWithQuery(['status' => '']) }}" 
-               class="px-4 py-2 rounded-lg {{ !request('status') ? 'bg-blue-500 text-white' : 'text-gray-600 hover:text-gray-800' }} transition duration-200">
-                Semua ({{ $pendaftaran->total() }})
-            </a>
-            <a href="{{ request()->fullUrlWithQuery(['status' => 'menunggu']) }}" 
-               class="px-4 py-2 rounded-lg {{ request('status') == 'menunggu' ? 'bg-yellow-500 text-white' : 'text-gray-600 hover:text-gray-800' }} transition duration-200">
-                Menunggu ({{ $pendaftaran->where('status', 'menunggu')->count() }})
-            </a>
-            <a href="{{ request()->fullUrlWithQuery(['status' => 'diterima']) }}" 
-               class="px-4 py-2 rounded-lg {{ request('status') == 'diterima' ? 'bg-green-500 text-white' : 'text-gray-600 hover:text-gray-800' }} transition duration-200">
-                Diterima ({{ $pendaftaran->where('status', 'diterima')->count() }})
-            </a>
-            <a href="{{ request()->fullUrlWithQuery(['status' => 'ditolak']) }}" 
-               class="px-4 py-2 rounded-lg {{ request('status') == 'ditolak' ? 'bg-red-500 text-white' : 'text-gray-600 hover:text-gray-800' }} transition duration-200">
-                Ditolak ({{ $pendaftaran->where('status', 'ditolak')->count() }})
-            </a>
+        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+            <!-- Filter Tabs -->
+            <div class="flex space-x-1 bg-gray-100 p-1 rounded-lg">
+                <a href="{{ request()->fullUrlWithQuery(['status' => '']) }}" 
+                   class="px-4 py-2 rounded-lg text-sm font-medium transition duration-200 {{ !request('status') ? 'bg-white text-blue-600 shadow-sm' : 'text-gray-600 hover:text-gray-800' }}">
+                    Semua ({{ $pendaftaran->total() }})
+                </a>
+                <a href="{{ request()->fullUrlWithQuery(['status' => 'menunggu']) }}" 
+                   class="px-4 py-2 rounded-lg text-sm font-medium transition duration-200 {{ request('status') == 'menunggu' ? 'bg-yellow-100 text-yellow-800 shadow-sm' : 'text-gray-600 hover:text-gray-800' }}">
+                    Menunggu ({{ $stats['menunggu'] ?? 0 }})
+                </a>
+                <a href="{{ request()->fullUrlWithQuery(['status' => 'diterima']) }}" 
+                   class="px-4 py-2 rounded-lg text-sm font-medium transition duration-200 {{ request('status') == 'diterima' ? 'bg-green-100 text-green-800 shadow-sm' : 'text-gray-600 hover:text-gray-800' }}">
+                    Diterima ({{ $stats['diterima'] ?? 0 }})
+                </a>
+                <a href="{{ request()->fullUrlWithQuery(['status' => 'ditolak']) }}" 
+                   class="px-4 py-2 rounded-lg text-sm font-medium transition duration-200 {{ request('status') == 'ditolak' ? 'bg-red-100 text-red-800 shadow-sm' : 'text-gray-600 hover:text-gray-800' }}">
+                    Ditolak ({{ $stats['ditolak'] ?? 0 }})
+                </a>
+            </div>
+
+            <!-- Search -->
+            <div class="flex-1 max-w-md">
+                <form action="{{ route('admin.pendaftaran.index') }}" method="GET">
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="fas fa-search text-gray-400"></i>
+                        </div>
+                        <input type="text" name="search" value="{{ request('search') }}" 
+                               class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
+                               placeholder="Cari siswa atau IDUKA...">
+                        @if(request('status'))
+                            <input type="hidden" name="status" value="{{ request('status') }}">
+                        @endif
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 
@@ -45,6 +119,7 @@
             <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                     <tr>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">No</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Siswa</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">IDUKA</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tanggal Daftar</th>
@@ -54,47 +129,80 @@
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
-                    @forelse($pendaftaran as $item)
+                    @forelse($pendaftaran as $index => $item)
                         <tr class="hover:bg-gray-50 transition duration-150">
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm font-medium text-gray-900">{{ $item->siswa->nama_lengkap }}</div>
-                                <div class="text-sm text-gray-500">{{ $item->siswa->nis }}</div>
+                                <div class="text-sm font-medium text-gray-900">
+                                    {{ ($pendaftaran->currentPage() - 1) * $pendaftaran->perPage() + $index + 1 }}
+                                </div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm font-medium text-gray-900">{{ $item->iduka->nama_iduka }}</div>
-                                <div class="text-sm text-gray-500">{{ $item->iduka->bidang_usaha }}</div>
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0 h-10 w-10 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
+                                        <i class="fas fa-user-graduate text-blue-600"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-sm font-medium text-gray-900">{{ $item->siswa->nama_lengkap }}</div>
+                                        <div class="text-xs text-gray-500">{{ $item->siswa->nis }} • {{ $item->siswa->kelas ?? '-' }}</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0 h-10 w-10 bg-green-100 rounded-lg flex items-center justify-center mr-3">
+                                        <i class="fas fa-building text-green-600"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-sm font-medium text-gray-900">{{ $item->iduka->nama_iduka }}</div>
+                                        <div class="text-xs text-gray-500">{{ $item->iduka->bidang_usaha }}</div>
+                                    </div>
+                                </div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="text-sm text-gray-900">{{ $item->tanggal_daftar->format('d/m/Y') }}</div>
+                                <div class="text-xs text-gray-500">{{ $item->tanggal_daftar->diffForHumans() }}</div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 @if($item->status == 'diterima')
-                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                        <i class="fas fa-check mr-1"></i> Diterima
+                                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                                        <i class="fas fa-check mr-1 text-xs"></i> Diterima
                                     </span>
                                 @elseif($item->status == 'ditolak')
-                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
-                                        <i class="fas fa-times mr-1"></i> Ditolak
+                                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800">
+                                        <i class="fas fa-times mr-1 text-xs"></i> Ditolak
                                     </span>
                                 @else
-                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
-                                        <i class="fas fa-clock mr-1"></i> Menunggu
+                                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800">
+                                        <i class="fas fa-clock mr-1 text-xs"></i> Menunggu
                                     </span>
                                 @endif
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="text-sm text-gray-900">{{ $item->petugas->nama_lengkap ?? '-' }}</div>
+                                <div class="text-xs text-gray-500">
+                                    @if($item->petugas)
+                                        {{ $item->updated_at->format('d/m/Y') }}
+                                    @else
+                                        -
+                                    @endif
+                                </div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                 <div class="flex space-x-2">
-                                    <a href="{{ route('admin.pendaftaran.show', $item) }}" class="text-blue-600 hover:text-blue-900 transition duration-200" title="Detail">
+                                    <a href="{{ route('admin.pendaftaran.show', $item) }}" 
+                                       class="text-blue-600 hover:text-blue-900 transition duration-200 p-2 rounded-lg hover:bg-blue-50"
+                                       title="Detail">
                                         <i class="fas fa-eye"></i>
                                     </a>
                                     @if($item->status == 'menunggu')
-                                        <button onclick="openApproveModal({{ $item->id }})" class="text-green-600 hover:text-green-900 transition duration-200" title="Setujui">
+                                        <button onclick="openApproveModal({{ $item->id }})" 
+                                                class="text-green-600 hover:text-green-900 transition duration-200 p-2 rounded-lg hover:bg-green-50"
+                                                title="Setujui">
                                             <i class="fas fa-check"></i>
                                         </button>
-                                        <button onclick="openRejectModal({{ $item->id }})" class="text-red-600 hover:text-red-900 transition duration-200" title="Tolak">
+                                        <button onclick="openRejectModal({{ $item->id }})" 
+                                                class="text-red-600 hover:text-red-900 transition duration-200 p-2 rounded-lg hover:bg-red-50"
+                                                title="Tolak">
                                             <i class="fas fa-times"></i>
                                         </button>
                                     @endif
@@ -103,9 +211,16 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6" class="px-6 py-8 text-center text-gray-500">
-                                <i class="fas fa-clipboard-list text-3xl mb-3"></i>
-                                <p>Belum ada data pendaftaran.</p>
+                            <td colspan="7" class="px-6 py-8 text-center text-gray-500">
+                                <i class="fas fa-clipboard-list text-4xl mb-3 text-gray-300"></i>
+                                <p class="text-lg font-medium text-gray-600">Belum ada data pendaftaran</p>
+                                <p class="text-sm text-gray-500 mt-1">
+                                    @if(request('search') || request('status'))
+                                        Coba ubah pencarian atau filter Anda
+                                    @else
+                                        Siswa belum melakukan pendaftaran PKL
+                                    @endif
+                                </p>
                             </td>
                         </tr>
                     @endforelse
@@ -115,14 +230,21 @@
         
         @if($pendaftaran->hasPages())
             <div class="px-6 py-4 border-t border-gray-200 bg-white">
-                {{ $pendaftaran->links() }}
+                <div class="flex items-center justify-between">
+                    <div class="text-sm text-gray-700">
+                        Menampilkan {{ $pendaftaran->firstItem() }} - {{ $pendaftaran->lastItem() }} dari {{ $pendaftaran->total() }} hasil
+                    </div>
+                    <div>
+                        {{ $pendaftaran->links() }}
+                    </div>
+                </div>
             </div>
         @endif
     </div>
 </div>
 
 <!-- Modal Approve -->
-<div id="approveModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden">
+<div id="approveModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden z-50">
     <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
         <div class="mt-3">
             <h3 class="text-lg font-medium text-gray-900 mb-4">Setujui Pendaftaran</h3>
@@ -149,7 +271,7 @@
 </div>
 
 <!-- Modal Reject -->
-<div id="rejectModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden">
+<div id="rejectModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden z-50">
     <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
         <div class="mt-3">
             <h3 class="text-lg font-medium text-gray-900 mb-4">Tolak Pendaftaran</h3>

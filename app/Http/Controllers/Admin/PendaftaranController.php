@@ -9,14 +9,41 @@ use Illuminate\Support\Facades\Auth;
 
 class PendaftaranController extends Controller
 {
-    public function index()
-    {
-        $pendaftaran = Pendaftaran::with(['siswa', 'iduka', 'petugas'])
-            ->latest()
-            ->paginate(10);
-            
-        return view('admin.pendaftaran.index', compact('pendaftaran'));
+    public function index(Request $request)
+{
+    $query = Pendaftaran::with(['siswa', 'iduka', 'petugas'])
+        ->latest();
+
+    // Filter by status if provided
+    if ($request->status) {
+        $query->where('status', $request->status);
     }
+
+    // Search functionality
+    if ($request->has('search') && $request->search != '') {
+        $search = $request->search;
+        $query->where(function($q) use ($search) {
+            $q->whereHas('siswa', function($q) use ($search) {
+                $q->where('nama_lengkap', 'like', "%{$search}%")
+                  ->orWhere('nis', 'like', "%{$search}%");
+            })->orWhereHas('iduka', function($q) use ($search) {
+                $q->where('nama_iduka', 'like', "%{$search}%")
+                  ->orWhere('bidang_usaha', 'like', "%{$search}%");
+            });
+        });
+    }
+
+    $pendaftaran = $query->paginate(10);
+
+    // Stats for counters
+    $stats = [
+        'menunggu' => Pendaftaran::where('status', 'menunggu')->count(),
+        'diterima' => Pendaftaran::where('status', 'diterima')->count(),
+        'ditolak' => Pendaftaran::where('status', 'ditolak')->count(),
+    ];
+        
+    return view('admin.pendaftaran.index', compact('pendaftaran', 'stats'));
+}
 
     public function show(Pendaftaran $pendaftaran)
     {

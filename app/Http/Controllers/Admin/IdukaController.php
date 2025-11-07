@@ -8,11 +8,25 @@ use Illuminate\Http\Request;
 
 class IdukaController extends Controller
 {
-    public function index()
-    {
-        $iduka = Iduka::latest()->paginate(10);
-        return view('admin.iduka.index', compact('iduka'));
+    public function index(Request $request)
+{
+    $query = Iduka::query();
+
+    // Search functionality
+    if ($request->has('search') && $request->search != '') {
+        $search = $request->search;
+        $query->where(function($q) use ($search) {
+            $q->where('nama_iduka', 'like', "%{$search}%")
+              ->orWhere('bidang_usaha', 'like', "%{$search}%")
+              ->orWhere('alamat', 'like', "%{$search}%")
+              ->orWhere('kontak_person', 'like', "%{$search}%");
+        });
     }
+
+    $iduka = $query->latest()->paginate(10);
+    
+    return view('admin.iduka.index', compact('iduka'));
+}
 
     public function create()
     {
