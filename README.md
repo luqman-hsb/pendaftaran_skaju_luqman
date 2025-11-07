@@ -1,70 +1,70 @@
 # Pendaftaran PKL SKAJU
 
-## Overview
+## Gambaran Umum
 
-Pendaftaran PKL SKAJU is a web-based application built with Laravel for managing student internship (Praktik Kerja Lapangan - PKL) registrations at SMK SKAJU. The system allows students to register for internships at industrial partners (IDUKA), while administrators and officers manage students, IDUKA, and registration approvals.
+Pendaftaran PKL SKAJU adalah aplikasi berbasis web yang dibangun dengan Laravel untuk mengelola pendaftaran praktik kerja lapangan (PKL) siswa di SMK SKAJU. Sistem ini memungkinkan siswa mendaftar magang di mitra industri (IDUKA), sementara administrator dan petugas mengelola siswa, IDUKA, dan persetujuan pendaftaran.
 
-## Features
+## Fitur
 
--   **Student Registration**: Students can create accounts, view available IDUKA, and submit PKL registration forms.
--   **Admin Dashboard**: Officers can manage students, IDUKA, and review/approve/reject PKL registrations.
--   **Role-Based Access**: Separate authentication for students and officers, with superadmin privileges for managing officers.
--   **Profile Management**: Students can update their profiles.
--   **Registration History**: Students can view their PKL registration history.
+-   **Pendaftaran Siswa**: Siswa dapat membuat akun, melihat IDUKA yang tersedia, dan mengirimkan formulir pendaftaran PKL.
+-   **Dashboard Admin**: Petugas dapat mengelola siswa, IDUKA, dan meninjau/menyetujui/menolak pendaftaran PKL.
+-   **Akses Berbasis Peran**: Otentikasi terpisah untuk siswa dan petugas, dengan hak superadmin untuk mengelola petugas.
+-   **Manajemen Profil**: Siswa dapat memperbarui profil mereka.
+-   **Riwayat Pendaftaran**: Siswa dapat melihat riwayat pendaftaran PKL mereka.
 
-## Technology Stack
+## Teknologi yang Digunakan
 
 -   **Framework**: Laravel 10
--   **Database**: MySQL (or compatible with Laravel's database agnostic migrations)
--   **Frontend**: Blade templates with Bootstrap (via Vite for asset compilation)
--   **Authentication**: Laravel Sanctum for API, custom guards for students and officers
--   **Other**: Composer for dependency management, PHPUnit for testing
+-   **Database**: MySQL (atau kompatibel dengan migrasi database agnostic Laravel)
+-   **Frontend**: Template Blade dengan Bootstrap (via Vite untuk kompilasi aset)
+-   **Otentikasi**: Laravel Sanctum untuk API, guard kustom untuk siswa dan petugas
+-   **Lainnya**: Composer untuk manajemen dependensi, PHPUnit untuk pengujian
 
-## Installation
+## Instalasi
 
-1. Clone the repository:
+1. Kloning repositori:
 
     ```
-    git clone <repository-url>
+    git clone git@github.com:luqman-hsb/pendaftaran_skaju_luqman.git
     cd pendaftaran-pkl-skaju
     ```
 
-2. Install dependencies:
+2. Instal dependensi:
 
     ```
     composer install
     npm install
     ```
 
-3. Set up environment:
+3. Siapkan environment:
 
-    - Copy `.env.example` to `.env`
-    - Configure database settings in `.env`
-    - Generate application key: `php artisan key:generate`
+    - Salin `.env.example` ke `.env`
+    - Konfigurasi pengaturan database di `.env`
+    - Generate kunci aplikasi: `php artisan key:generate`
 
-4. Run migrations and seeders:
+4. Jalankan migrasi dan seeder:
 
     ```
     php artisan migrate
     php artisan db:seed
     ```
 
-5. Compile assets:
+5. Kompilasi aset:
 
     ```
     npm run build
     ```
 
-6. Start the development server:
+6. Jalankan server development:
     ```
     php artisan serve
     ```
 
-## Database Structure
+## Struktur Database
 
-The application uses the following database tables:
+Aplikasi menggunakan tabel database berikut:
 
-### table_petugas (Officers)
+### table_petugas (Petugas)
 
 -   `id` (primary key)
 -   `nama_lengkap` (string)
@@ -74,7 +74,7 @@ The application uses the following database tables:
 -   `is_superadmin` (boolean, default false)
 -   `timestamps`
 
-### table_siswa (Students)
+### table_siswa (Siswa)
 
 -   `id` (primary key)
 -   `nis` (string, 20, unique)
@@ -88,7 +88,7 @@ The application uses the following database tables:
 -   `password` (string)
 -   `timestamps`
 
-### table_iduka (Industrial Partners)
+### table_iduka (Mitra Industri)
 
 -   `id` (primary key)
 -   `nama_iduka` (string)
@@ -100,70 +100,70 @@ The application uses the following database tables:
 -   `kuota` (integer, default 0)
 -   `timestamps`
 
-### table_pendaftaran (Registrations)
+### table_pendaftaran (Pendaftaran)
 
 -   `id` (primary key)
--   `siswa_id` (foreign key to table_siswa, cascade on delete)
--   `iduka_id` (foreign key to table_iduka, cascade on delete)
--   `petugas_id` (foreign key to table_petugas, nullable, null on delete)
+-   `siswa_id` (foreign key ke table_siswa, cascade on delete)
+-   `iduka_id` (foreign key ke table_iduka, cascade on delete)
+-   `petugas_id` (foreign key ke table_petugas, nullable, null on delete)
 -   `tanggal_daftar` (date)
 -   `tanggal_berlaku` (date, nullable)
 -   `status` (enum: 'menunggu', 'diterima', 'ditolak', default 'menunggu')
 -   `catatan_penolakan` (text, nullable)
 -   `timestamps`
 
-## Dummy Data
+## Data Dummy
 
-The application includes seeders for initial data:
+Aplikasi menyertakan seeder untuk data awal:
 
 ### Petugas Seeder
 
 -   Administrator (Super Admin): email `admin@sekolah.sch.id`, password `password123`
 -   Petugas PKL (Koordinator PKL): email `pkl@sekolah.sch.id`, password `password123`
 
-To run seeders:
+Untuk menjalankan seeder:
 
 ```
 php artisan db:seed --class=PetugasSeeder
 ```
 
-## Routes
+## Rute
 
-### Student Routes
+### Rute Siswa
 
--   `/` - Login page
--   `/login` - Student login
--   `/register` - Student registration
--   `/dashboard` - Student dashboard
--   `/profile` - Profile management
--   `/pkl/daftar` - View available IDUKA
--   `/pkl/daftar/{iduka}` - PKL registration form
--   `/pkl/history` - Registration history
+-   `/` - Halaman login
+-   `/login` - Login siswa
+-   `/register` - Registrasi siswa
+-   `/dashboard` - Dashboard siswa
+-   `/profile` - Manajemen profil
+-   `/pkl/daftar` - Lihat IDUKA tersedia
+-   `/pkl/daftar/{iduka}` - Formulir pendaftaran PKL
+-   `/pkl/history` - Riwayat pendaftaran
 
-### Admin Routes (prefix: /admin)
+### Rute Admin (prefix: /admin)
 
--   `/admin/login` - Officer login
--   `/admin/dashboard` - Admin dashboard
--   `/admin/siswa` - Manage students (CRUD)
--   `/admin/iduka` - Manage IDUKA (CRUD)
--   `/admin/pendaftaran` - Manage registrations (view, approve, reject)
--   `/admin/petugas` - Manage officers (CRUD, superadmin only)
+-   `/admin/login` - Login petugas
+-   `/admin/dashboard` - Dashboard admin
+-   `/admin/siswa` - Kelola siswa (CRUD)
+-   `/admin/iduka` - Kelola IDUKA (CRUD)
+-   `/admin/pendaftaran` - Kelola pendaftaran (lihat, setujui, tolak)
+-   `/admin/petugas` - Kelola petugas (CRUD, superadmin saja)
 
-## Testing
+## Pengujian
 
-Run tests with PHPUnit:
+Jalankan pengujian dengan PHPUnit:
 
 ```
 ./vendor/bin/phpunit
 ```
 
-## Contributing
+## Kontribusi
 
-1. Fork the repository
-2. Create a feature branch
-3. Make changes and add tests
-4. Submit a pull request
+1. Fork repositori
+2. Buat branch fitur
+3. Buat perubahan dan tambahkan pengujian
+4. Kirim pull request
 
-## License
+## Lisensi
 
-This project is licensed under the MIT License.
+Proyek ini dilisensikan di bawah Lisensi MIT.
