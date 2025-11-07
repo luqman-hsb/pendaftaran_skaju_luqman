@@ -193,29 +193,11 @@
                     @endif
                 </div>
 
-                <!-- Quick Stats -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="bg-white border border-gray-200 rounded-lg p-6 text-center hover:shadow-lg transition duration-200">
-                        <i class="fas fa-book text-blue-500 text-2xl mb-3"></i>
-                        <h3 class="font-semibold text-gray-800">Mata Pelajaran</h3>
-                        <p class="text-2xl font-bold text-blue-600 mt-2">12</p>
-                    </div>
-                    <div class="bg-white border border-gray-200 rounded-lg p-6 text-center hover:shadow-lg transition duration-200">
-                        <i class="fas fa-chart-line text-green-500 text-2xl mb-3"></i>
-                        <h3 class="font-semibold text-gray-800">Nilai Rata-rata</h3>
-                        <p class="text-2xl font-bold text-green-600 mt-2">85.5</p>
-                    </div>
-                    <div class="bg-white border border-gray-200 rounded-lg p-6 text-center hover:shadow-lg transition duration-200">
-                        <i class="fas fa-calendar text-purple-500 text-2xl mb-3"></i>
-                        <h3 class="font-semibold text-gray-800">Kehadiran</h3>
-                        <p class="text-2xl font-bold text-purple-600 mt-2">94%</p>
-                    </div>
-                </div>
 
                 <!-- Quick Actions -->
                 <div class="mt-8 border-t pt-6">
                     <h3 class="text-lg font-semibold text-gray-800 mb-4">Aksi Cepat</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         <a href="{{ route('pkl.daftar') }}" class="bg-white border border-gray-200 rounded-lg p-4 text-center hover:shadow-md transition duration-200">
                             <i class="fas fa-building text-blue-500 text-xl mb-2"></i>
                             <p class="font-medium text-gray-700">Daftar PKL</p>
@@ -224,11 +206,7 @@
                             <i class="fas fa-history text-green-500 text-xl mb-2"></i>
                             <p class="font-medium text-gray-700">Riwayat PKL</p>
                         </a>
-                        <a href="#" class="bg-white border border-gray-200 rounded-lg p-4 text-center hover:shadow-md transition duration-200">
-                            <i class="fas fa-file-alt text-purple-500 text-xl mb-2"></i>
-                            <p class="font-medium text-gray-700">Laporan</p>
-                        </a>
-                        <a href="#" class="bg-white border border-gray-200 rounded-lg p-4 text-center hover:shadow-md transition duration-200">
+                        <a href="{{ route('profile.edit') }}" class="bg-white border border-gray-200 rounded-lg p-4 text-center hover:shadow-md transition duration-200">
                             <i class="fas fa-user-edit text-orange-500 text-xl mb-2"></i>
                             <p class="font-medium text-gray-700">Edit Profil</p>
                         </a>
