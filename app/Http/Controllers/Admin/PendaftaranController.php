@@ -10,46 +10,46 @@ use Illuminate\Support\Facades\Auth;
 class PendaftaranController extends Controller
 {
     public function index(Request $request)
-{
-    $query = Pendaftaran::with(['siswa', 'iduka', 'petugas'])
+    {
+        $query = Pendaftaran::with(['siswa', 'iduka', 'petugas'])
         ->latest();
 
     // Filter by status if provided
-    if ($request->status) {
-        $query->where('status', $request->status);
-    }
+        if ($request->status) {
+            $query->where('status', $request->status);
+        }
 
     // Filter history (sudah diproses)
-    if ($request->has('history') && $request->history == 'true') {
-        $query->whereIn('status', ['diterima', 'ditolak']);
-    }
+        if ($request->has('history') && $request->history == 'true') {
+            $query->whereIn('status', ['diterima', 'ditolak']);
+        }
 
     // Search functionality
-    if ($request->has('search') && $request->search != '') {
-        $search = $request->search;
-        $query->where(function($q) use ($search) {
-            $q->whereHas('siswa', function($q) use ($search) {
-                $q->where('nama_lengkap', 'like', "%{$search}%")
-                  ->orWhere('nis', 'like', "%{$search}%");
-            })->orWhereHas('iduka', function($q) use ($search) {
-                $q->where('nama_iduka', 'like', "%{$search}%")
-                  ->orWhere('bidang_usaha', 'like', "%{$search}%");
+        if ($request->has('search') && $request->search != '') {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->whereHas('siswa', function ($q) use ($search) {
+                    $q->where('nama_lengkap', 'like', "%{$search}%")
+                      ->orWhere('nis', 'like', "%{$search}%");
+                })->orWhereHas('iduka', function ($q) use ($search) {
+                    $q->where('nama_iduka', 'like', "%{$search}%")
+                      ->orWhere('bidang_usaha', 'like', "%{$search}%");
+                });
             });
-        });
-    }
+        }
 
-    $pendaftaran = $query->paginate(10);
+        $pendaftaran = $query->paginate(10);
 
     // Stats for counters
-    $stats = [
+        $stats = [
         'menunggu' => Pendaftaran::where('status', 'menunggu')->count(),
         'diterima' => Pendaftaran::where('status', 'diterima')->count(),
         'ditolak' => Pendaftaran::where('status', 'ditolak')->count(),
         'history' => Pendaftaran::whereIn('status', ['diterima', 'ditolak'])->count(),
-    ];
-        
-    return view('admin.pendaftaran.index', compact('pendaftaran', 'stats'));
-}
+        ];
+
+        return view('admin.pendaftaran.index', compact('pendaftaran', 'stats'));
+    }
 
     public function show(Pendaftaran $pendaftaran)
     {

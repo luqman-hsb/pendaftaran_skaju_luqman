@@ -14,7 +14,7 @@ class DashboardController extends Controller
         $siswa = Auth::user();
         $activePKL = $siswa->getActivePKL();
         $pendingRegistration = $siswa->getPendingRegistration(); // Ganti dari hasPendingRegistration()
-        
+
         return view('dashboard', compact('siswa', 'activePKL', 'pendingRegistration'));
     }
 }

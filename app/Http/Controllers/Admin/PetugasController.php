@@ -11,30 +11,30 @@ use Illuminate\Validation\Rule;
 class PetugasController extends Controller
 {
     public function index(Request $request)
-{
-    $query = Petugas::query();
+    {
+        $query = Petugas::query();
 
     // Search functionality
-    if ($request->has('search') && $request->search != '') {
-        $search = $request->search;
-        $query->where(function($q) use ($search) {
-            $q->where('nama_lengkap', 'like', "%{$search}%")
-              ->orWhere('email', 'like', "%{$search}%")
-              ->orWhere('jabatan', 'like', "%{$search}%");
-        });
-    }
+        if ($request->has('search') && $request->search != '') {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('nama_lengkap', 'like', "%{$search}%")
+                  ->orWhere('email', 'like', "%{$search}%")
+                  ->orWhere('jabatan', 'like', "%{$search}%");
+            });
+        }
 
-    $petugas = $query->latest()->paginate(10);
+        $petugas = $query->latest()->paginate(10);
 
     // Stats for counters
-    $stats = [
+        $stats = [
         'superadmin' => Petugas::where('is_superadmin', true)->count(),
         'petugas' => Petugas::where('is_superadmin', false)->count(),
         'aktif_hari_ini' => Petugas::whereDate('created_at', today())->count(),
-    ];
+        ];
 
-    return view('admin.petugas.index', compact('petugas', 'stats'));
-}
+        return view('admin.petugas.index', compact('petugas', 'stats'));
+    }
 
     public function create()
     {

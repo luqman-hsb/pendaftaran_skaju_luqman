@@ -8,7 +8,8 @@ use Illuminate\Notifications\Notifiable;
 
 class Siswa extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory;
+    use Notifiable;
 
     protected $table = 'table_siswa';
     protected $primaryKey = 'id';

@@ -8,7 +8,8 @@ use Illuminate\Notifications\Notifiable;
 
 class Petugas extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory;
+    use Notifiable;
 
     protected $table = 'table_petugas';
     protected $primaryKey = 'id';
