@@ -74,8 +74,8 @@ return [
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
-            'search_path' => 'public',
-            'sslmode' => 'prefer',
+            'search_path' => 'pendaftaran_skaju_luqman',
+            'sslmode' => 'require',
         ],
 
         'sqlsrv' => [
