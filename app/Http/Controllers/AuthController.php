@@ -24,32 +24,54 @@ class AuthController extends Controller
 
     // Handle login
     public function login(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'nis' => 'required|string',
-            'password' => 'required|string|min:6',
+{
+    \Log::info('=== LOGIN ATTEMPT START ===');
+    \Log::info('Input NIS:', ['nis' => $request->nis]);
+
+    $validator = Validator::make($request->all(), [
+        'nis' => 'required|string',
+        'password' => 'required|string|min:6',
+    ]);
+
+    if ($validator->fails()) {
+        \Log::warning('Validation failed', $validator->errors()->toArray());
+        return back()->withErrors($validator)->withInput();
+    }
+
+    $credentials = $request->only('nis', 'password');
+
+    // Check if user exists with NIS
+    $siswa = Siswa::where('nis', $credentials['nis'])->first();
+
+    \Log::info('User found:', [
+        'exists' => !is_null($siswa),
+        'id' => $siswa ? $siswa->id : null,
+        'name' => $siswa ? $siswa->nama_lengkap : null
+    ]);
+
+    if ($siswa && Hash::check($credentials['password'], $siswa->password)) {
+        \Log::info('Password verified, attempting login...');
+        
+        // Coba login dengan berbagai approach
+        Auth::guard('web')->login($siswa);
+        $request->session()->regenerate();
+
+        \Log::info('After login check:', [
+            'auth_check' => Auth::check(),
+            'auth_user' => Auth::user() ? Auth::user()->id : null,
+            'session_id' => session()->getId()
         ]);
 
-        if ($validator->fails()) {
-            return back()->withErrors($validator)->withInput();
-        }
-
-        $credentials = $request->only('nis', 'password');
-
-        // Check if user exists with NIS
-        $siswa = Siswa::where('nis', $credentials['nis'])->first();
-
-        if ($siswa && Hash::check($credentials['password'], $siswa->password)) {
-            Auth::guard('web')->login($siswa);
-            $request->session()->regenerate();
-
-            return redirect()->intended('/dashboard');
-        }
-
-        return back()->withErrors([
-            'nis' => 'NIS atau password salah.',
-        ])->withInput();
+        // Coba redirect tanpa intended
+        \Log::info('Redirecting to dashboard...');
+        return redirect('/dashboard');
     }
+
+    \Log::warning('Login failed - invalid credentials');
+    return back()->withErrors([
+        'nis' => 'NIS atau password salah.',
+    ])->withInput();
+}
 
     // Handle registration
     public function register(Request $request)
