@@ -70,4 +70,13 @@ class Siswa extends Authenticatable
             ->where('status', 'menunggu')
             ->exists();
     }
+
+
+    // Get pendaftaran yang sedang menunggu
+    public function getPendingRegistration()
+    {
+        return $this->pendaftaran()
+            ->where('status', 'menunggu')
+            ->first();
+    }
 }

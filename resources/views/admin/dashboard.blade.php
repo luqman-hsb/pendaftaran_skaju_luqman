@@ -23,29 +23,35 @@
             </div>
             
             <nav class="mt-8">
-                <div class="px-4 space-y-2">
-                    <a href="{{ route('admin.dashboard') }}" class="flex items-center px-4 py-3 bg-blue-700 rounded-lg text-white">
-                        <i class="fas fa-tachometer-alt mr-3"></i>
-                        Dashboard
-                    </a>
-                    <a href="#" class="flex items-center px-4 py-3 text-blue-200 hover:bg-blue-700 rounded-lg transition duration-200">
-                        <i class="fas fa-users mr-3"></i>
-                        Manajemen Siswa
-                    </a>
-                    <a href="#" class="flex items-center px-4 py-3 text-blue-200 hover:bg-blue-700 rounded-lg transition duration-200">
-                        <i class="fas fa-building mr-3"></i>
-                        Manajemen IDUKA
-                    </a>
-                    <a href="#" class="flex items-center px-4 py-3 text-blue-200 hover:bg-blue-700 rounded-lg transition duration-200">
-                        <i class="fas fa-clipboard-list mr-3"></i>
-                        Pendaftaran PKL
-                    </a>
-                    <a href="#" class="flex items-center px-4 py-3 text-blue-200 hover:bg-blue-700 rounded-lg transition duration-200">
-                        <i class="fas fa-cog mr-3"></i>
-                        Pengaturan
-                    </a>
-                </div>
-            </nav>
+    <div class="px-4 space-y-2">
+        <a href="{{ route('admin.dashboard') }}" class="flex items-center px-4 py-3 bg-blue-700 rounded-lg text-white">
+            <i class="fas fa-tachometer-alt mr-3"></i>
+            Dashboard
+        </a>
+        <a href="{{ route('admin.siswa.index') }}" class="flex items-center px-4 py-3 text-blue-200 hover:bg-blue-700 rounded-lg transition duration-200">
+            <i class="fas fa-users mr-3"></i>
+            Manajemen Siswa
+        </a>
+        <a href="{{ route('admin.iduka.index') }}" class="flex items-center px-4 py-3 text-blue-200 hover:bg-blue-700 rounded-lg transition duration-200">
+            <i class="fas fa-building mr-3"></i>
+            Manajemen IDUKA
+        </a>
+        <a href="{{ route('admin.pendaftaran.index') }}" class="flex items-center px-4 py-3 text-blue-200 hover:bg-blue-700 rounded-lg transition duration-200">
+            <i class="fas fa-clipboard-list mr-3"></i>
+            Pendaftaran PKL
+        </a>
+        @if(Auth::guard('petugas')->user()->is_superadmin)
+            <a href="{{ route('admin.petugas.index') }}" class="flex items-center px-4 py-3 text-blue-200 hover:bg-blue-700 rounded-lg transition duration-200">
+                <i class="fas fa-user-shield mr-3"></i>
+                Manajemen Petugas
+            </a>
+        @endif
+        <a href="#" class="flex items-center px-4 py-3 text-blue-200 hover:bg-blue-700 rounded-lg transition duration-200">
+            <i class="fas fa-cog mr-3"></i>
+            Pengaturan
+        </a>
+    </div>
+</nav>
         </div>
 
         <!-- Main Content -->
@@ -229,27 +235,35 @@
                 </div>
 
                 <!-- Quick Actions -->
-                <div class="mt-8 bg-white rounded-xl shadow-md border border-gray-200 p-6">
-                    <h2 class="text-lg font-semibold text-gray-800 mb-4">Aksi Cepat</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                        <a href="#" class="bg-blue-50 border border-blue-200 rounded-lg p-4 text-center hover:bg-blue-100 transition duration-200">
-                            <i class="fas fa-clipboard-check text-blue-500 text-xl mb-2"></i>
-                            <p class="font-medium text-blue-800">Review Pendaftaran</p>
-                        </a>
-                        <a href="#" class="bg-green-50 border border-green-200 rounded-lg p-4 text-center hover:bg-green-100 transition duration-200">
-                            <i class="fas fa-building text-green-500 text-xl mb-2"></i>
-                            <p class="font-medium text-green-800">Kelola IDUKA</p>
-                        </a>
-                        <a href="#" class="bg-purple-50 border border-purple-200 rounded-lg p-4 text-center hover:bg-purple-100 transition duration-200">
-                            <i class="fas fa-users text-purple-500 text-xl mb-2"></i>
-                            <p class="font-medium text-purple-800">Data Siswa</p>
-                        </a>
-                        <a href="#" class="bg-orange-50 border border-orange-200 rounded-lg p-4 text-center hover:bg-orange-100 transition duration-200">
-                            <i class="fas fa-chart-bar text-orange-500 text-xl mb-2"></i>
-                            <p class="font-medium text-orange-800">Laporan</p>
-                        </a>
-                    </div>
-                </div>
+                <!-- Quick Actions -->
+<div class="mt-8 bg-white rounded-xl shadow-md border border-gray-200 p-6">
+    <h2 class="text-lg font-semibold text-gray-800 mb-4">Aksi Cepat</h2>
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <a href="{{ route('admin.pendaftaran.index') }}" class="bg-blue-50 border border-blue-200 rounded-lg p-4 text-center hover:bg-blue-100 transition duration-200">
+            <i class="fas fa-clipboard-check text-blue-500 text-xl mb-2"></i>
+            <p class="font-medium text-blue-800">Review Pendaftaran</p>
+        </a>
+        <a href="{{ route('admin.iduka.index') }}" class="bg-green-50 border border-green-200 rounded-lg p-4 text-center hover:bg-green-100 transition duration-200">
+            <i class="fas fa-building text-green-500 text-xl mb-2"></i>
+            <p class="font-medium text-green-800">Kelola IDUKA</p>
+        </a>
+        <a href="{{ route('admin.siswa.index') }}" class="bg-purple-50 border border-purple-200 rounded-lg p-4 text-center hover:bg-purple-100 transition duration-200">
+            <i class="fas fa-users text-purple-500 text-xl mb-2"></i>
+            <p class="font-medium text-purple-800">Data Siswa</p>
+        </a>
+        @if(Auth::guard('petugas')->user()->is_superadmin)
+            <a href="{{ route('admin.petugas.index') }}" class="bg-orange-50 border border-orange-200 rounded-lg p-4 text-center hover:bg-orange-100 transition duration-200">
+                <i class="fas fa-user-shield text-orange-500 text-xl mb-2"></i>
+                <p class="font-medium text-orange-800">Manajemen Petugas</p>
+            </a>
+        @else
+            <a href="#" class="bg-gray-50 border border-gray-200 rounded-lg p-4 text-center">
+                <i class="fas fa-chart-bar text-gray-500 text-xl mb-2"></i>
+                <p class="font-medium text-gray-800">Laporan</p>
+            </a>
+        @endif
+    </div>
+</div>
             </main>
         </div>
     </div>

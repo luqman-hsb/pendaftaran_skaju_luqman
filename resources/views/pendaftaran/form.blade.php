@@ -44,17 +44,10 @@
                 @csrf
                 
                 <div class="mb-6">
-                    <label class="block text-sm font-medium text-gray-700 mb-2">
-                        Motivasi dan Alasan Memilih IDUKA Ini *
-                    </label>
-                    <textarea 
-                        name="motivasi" 
-                        rows="6"
-                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
-                        placeholder="Tuliskan motivasi dan alasan Anda memilih IDUKA ini untuk melaksanakan PKL..."
-                        required
-                    ></textarea>
-                    <p class="text-sm text-gray-500 mt-1">Minimal 10 karakter</p>
+                    <p class="text-gray-700 mb-4">
+                        Anda akan mendaftar ke <strong>{{ $iduka->nama_iduka }}</strong> yang bergerak di bidang 
+                        <strong>{{ $iduka->bidang_usaha }}</strong>. Pastikan Anda telah mempertimbangkan pilihan ini dengan baik.
+                    </p>
                 </div>
 
                 <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
