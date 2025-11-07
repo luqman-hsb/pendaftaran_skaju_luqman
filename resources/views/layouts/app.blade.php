@@ -19,35 +19,32 @@
         
         body {
             font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
         }
         
-        .gradient-bg {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        .card-elegant {
+            background: white;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
         
-        .card-glass {
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+        .floating-slow {
+            animation: floatingSlow 6s ease-in-out infinite;
         }
         
-        .floating {
-            animation: floating 3s ease-in-out infinite;
+        @keyframes floatingSlow {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
         }
         
-        @keyframes floating {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+        .slide-up {
+            animation: slideUp 0.6s ease-out;
         }
         
-        .slide-in {
-            animation: slideIn 0.5s ease-out;
-        }
-        
-        @keyframes slideIn {
+        @keyframes slideUp {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
@@ -55,17 +52,42 @@
             }
         }
         
-        .pulse-glow {
-            animation: pulseGlow 2s infinite;
+        .fade-in {
+            animation: fadeIn 0.8s ease-out;
         }
         
-        @keyframes pulseGlow {
-            0%, 100% { box-shadow: 0 0 5px rgba(102, 126, 234, 0.5); }
-            50% { box-shadow: 0 0 20px rgba(102, 126, 234, 0.8); }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .input-focus:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -10px rgba(102, 126, 234, 0.6);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -10px rgba(17, 153, 142, 0.6);
         }
     </style>
 </head>
-<body class="min-h-screen gradient-bg">
+<body class="min-h-screen">
     @yield('content')
 </body>
 </html>

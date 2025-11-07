@@ -57,10 +57,12 @@ return new class extends Migration
             $table->foreignId('iduka_id')->constrained('table_iduka')->cascadeOnDelete();
             $table->foreignId('petugas_id')->nullable()->constrained('table_petugas')->nullOnDelete();
             $table->date('tanggal_daftar');
+            $table->date('tanggal_berlaku')->nullable();
             $table->enum('status', ['menunggu', 'diterima', 'ditolak'])->default('menunggu');
             $table->text('catatan_penolakan')->nullable();
             $table->timestamps();
         });
+
     }
 
     /**

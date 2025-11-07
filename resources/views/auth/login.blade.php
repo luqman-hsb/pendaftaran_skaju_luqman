@@ -1,95 +1,99 @@
 @extends('layouts.app')
 
-@section('title', 'Login Siswa')
+@section('title', 'Login Siswa - Sistem Akademik')
 
 @section('content')
 <div x-data="loginForm()" class="min-h-screen flex items-center justify-center p-4">
-    <!-- Floating Background Elements -->
+    <!-- Background Elements -->
     <div class="fixed inset-0 overflow-hidden pointer-events-none">
-        <div class="floating absolute top-1/4 left-1/4 w-20 h-20 bg-white rounded-full opacity-10"></div>
-        <div class="floating absolute top-1/3 right-1/4 w-16 h-16 bg-white rounded-full opacity-10" style="animation-delay: 1s;"></div>
-        <div class="floating absolute bottom-1/4 left-1/3 w-24 h-24 bg-white rounded-full opacity-10" style="animation-delay: 2s;"></div>
+        <div class="absolute top-10 left-10 w-6 h-6 bg-blue-200 rounded-full opacity-50 floating-slow"></div>
+        <div class="absolute top-32 right-20 w-8 h-8 bg-purple-200 rounded-full opacity-50 floating-slow" style="animation-delay: 2s;"></div>
+        <div class="absolute bottom-20 left-20 w-10 h-10 bg-indigo-200 rounded-full opacity-50 floating-slow" style="animation-delay: 4s;"></div>
+        <div class="absolute bottom-32 right-32 w-5 h-5 bg-blue-300 rounded-full opacity-50 floating-slow" style="animation-delay: 1s;"></div>
     </div>
 
-    <div class="max-w-md w-full space-y-8 slide-in">
+    <div class="max-w-md w-full space-y-8 slide-up">
         <!-- Header -->
-        <div class="text-center">
-            <div class="mx-auto w-20 h-20 bg-white rounded-full flex items-center justify-center mb-4 pulse-glow">
-                <i class="fas fa-graduation-cap text-2xl text-purple-600"></i>
+        <div class="text-center fade-in">
+            <div class="mx-auto w-20 h-20 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center mb-6 shadow-lg">
+                <i class="fas fa-graduation-cap text-2xl text-white"></i>
             </div>
-            <h2 class="text-3xl font-bold text-white">Selamat Datang</h2>
-            <p class="mt-2 text-purple-100">Masuk ke akun siswa Anda</p>
+            <h2 class="text-3xl font-bold text-gray-800">Masuk ke Sistem</h2>
+            <p class="mt-3 text-gray-600">Sistem Informasi Akademik Siswa</p>
         </div>
 
         <!-- Login Form -->
-        <div class="card-glass rounded-2xl shadow-xl p-8">
+        <div class="card-elegant rounded-xl p-8">
             <form class="space-y-6" action="{{ route('login.submit') }}" method="POST">
                 @csrf
                 
+                @if($errors->any())
+                    <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-exclamation-circle text-red-500 mr-2"></i>
+                            <span class="text-red-800 text-sm">NIS atau password salah</span>
+                        </div>
+                    </div>
+                @endif
+
                 <!-- NIS Input -->
                 <div>
-                    <label for="nis" class="block text-sm font-medium text-white">NIS</label>
-                    <div class="mt-1 relative">
+                    <label for="nis" class="block text-sm font-medium text-gray-700 mb-2">Nomor Induk Siswa</label>
+                    <div class="relative">
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <i class="fas fa-id-card text-purple-300"></i>
+                            <i class="fas fa-id-card text-gray-400"></i>
                         </div>
                         <input 
                             id="nis" 
                             name="nis" 
                             type="text" 
                             required 
-                            class="block w-full pl-10 pr-3 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-purple-200 focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent transition duration-200"
+                            class="input-focus block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none transition duration-200"
                             placeholder="Masukkan NIS Anda"
                             value="{{ old('nis') }}"
                         >
                     </div>
-                    @error('nis')
-                        <p class="mt-1 text-sm text-red-300">{{ $message }}</p>
-                    @enderror
                 </div>
 
                 <!-- Password Input -->
                 <div>
-                    <label for="password" class="block text-sm font-medium text-white">Password</label>
-                    <div class="mt-1 relative">
+                    <label for="password" class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                    <div class="relative">
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <i class="fas fa-lock text-purple-300"></i>
+                            <i class="fas fa-lock text-gray-400"></i>
                         </div>
                         <input 
                             id="password" 
                             name="password" 
                             :type="showPassword ? 'text' : 'password'" 
                             required 
-                            class="block w-full pl-10 pr-10 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-purple-200 focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent transition duration-200"
-                            placeholder="Masukkan password"
+                            class="input-focus block w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none transition duration-200"
+                            placeholder="Masukkan password Anda"
                         >
                         <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
-                            <button type="button" @click="showPassword = !showPassword" class="text-purple-300 hover:text-white transition duration-200">
+                            <button type="button" @click="showPassword = !showPassword" class="text-gray-400 hover:text-gray-600 transition duration-200">
                                 <i :class="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
                             </button>
                         </div>
                     </div>
-                    @error('password')
-                        <p class="mt-1 text-sm text-red-300">{{ $message }}</p>
-                    @enderror
                 </div>
 
                 <!-- Submit Button -->
                 <div>
                     <button 
                         type="submit" 
-                        class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transform hover:scale-105 transition duration-200"
+                        class="btn-primary w-full flex justify-center py-3 px-4 border border-transparent rounded-lg text-sm font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                     >
                         <i class="fas fa-sign-in-alt mr-2"></i>
-                        Masuk
+                        Masuk ke Sistem
                     </button>
                 </div>
 
                 <!-- Register Link -->
-                <div class="text-center">
-                    <p class="text-purple-100">
-                        Belum punya akun?
-                        <a href="{{ route('register.form') }}" class="font-medium text-white hover:text-purple-200 transition duration-200">
+                <div class="text-center pt-4 border-t border-gray-100">
+                    <p class="text-gray-600 text-sm">
+                        Belum memiliki akun?
+                        <a href="{{ route('register.form') }}" class="font-medium text-blue-600 hover:text-blue-500 transition duration-200">
                             Daftar di sini
                         </a>
                     </p>
@@ -99,8 +103,8 @@
 
         <!-- Footer -->
         <div class="text-center">
-            <p class="text-purple-100 text-sm">
-                &copy; 2024 Sistem Siswa. All rights reserved.
+            <p class="text-gray-500 text-sm">
+                &copy; 2024 Sistem Akademik. All rights reserved.
             </p>
         </div>
     </div>
@@ -111,14 +115,14 @@
         return {
             showPassword: false,
             init() {
-                // Add some interactive animations
+                // Add input focus effects
                 const inputs = document.querySelectorAll('input');
                 inputs.forEach(input => {
-                    input.addEventListener('focus', () => {
-                        input.parentElement.classList.add('ring-2', 'ring-white');
+                    input.addEventListener('focus', function() {
+                        this.parentElement.classList.add('ring-2', 'ring-blue-100');
                     });
-                    input.addEventListener('blur', () => {
-                        input.parentElement.classList.remove('ring-2', 'ring-white');
+                    input.addEventListener('blur', function() {
+                        this.parentElement.classList.remove('ring-2', 'ring-blue-100');
                     });
                 });
             }
