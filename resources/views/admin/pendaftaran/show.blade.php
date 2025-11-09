@@ -28,10 +28,18 @@
                     <p class="font-medium text-gray-900">{{ $pendaftaran->siswa->nis }}</p>
                 </div>
                 <div>
+                    <p class="text-sm text-gray-600">NIK</p>
+                    <p class="font-medium text-gray-900">{{ $pendaftaran->siswa->nik ?? '-' }}</p>
+                </div>
+                <div>
                     <p class="text-sm text-gray-600">Kelas & Jurusan</p>
                     <p class="font-medium text-gray-900">
                         {{ $pendaftaran->siswa->kelas ?? '-' }} / {{ $pendaftaran->siswa->jurusan ?? '-' }}
                     </p>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-600">Alamat</p>
+                    <p class="font-medium text-gray-900">{{ $pendaftaran->siswa->alamat ?? '-' }}</p>
                 </div>
                 <div>
                     <p class="text-sm text-gray-600">Email</p>
@@ -40,6 +48,22 @@
                 <div>
                     <p class="text-sm text-gray-600">No. Telepon</p>
                     <p class="font-medium text-gray-900">{{ $pendaftaran->siswa->no_hp ?? '-' }}</p>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-600">Status PKL</p>
+                    @if($pendaftaran->siswa->hasActivePKL())
+                        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                            <i class="fas fa-check-circle mr-1"></i> Sudah Aktif
+                        </span>
+                    @elseif($pendaftaran->siswa->hasPendingRegistration())
+                        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                            <i class="fas fa-clock mr-1"></i> Menunggu Persetujuan
+                        </span>
+                    @else
+                        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                            <i class="fas fa-times-circle mr-1"></i> Belum Daftar
+                        </span>
+                    @endif
                 </div>
             </div>
         </div>
