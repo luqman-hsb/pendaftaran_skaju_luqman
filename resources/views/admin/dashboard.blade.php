@@ -1,88 +1,9 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Admin - Sistem Akademik</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-</head>
-<body class="bg-gray-100 min-h-screen">
-    <div x-data="{ sidebarOpen: false }" class="flex h-screen">
-        <!-- Sidebar -->
-        <div :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'" class="sidebar fixed inset-y-0 left-0 z-50 w-64 bg-blue-800 text-white transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0">
-            <div class="flex items-center justify-between p-4 border-b border-blue-700">
-                <div class="flex items-center">
-                    <i class="fas fa-graduation-cap text-2xl mr-3"></i>
-                    <span class="text-xl font-semibold">Admin Panel</span>
-                </div>
-                <button @click="sidebarOpen = false" class="lg:hidden">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            
-            <nav class="mt-8">
-    <div class="px-4 space-y-2">
-        <a href="{{ route('admin.dashboard') }}" class="flex items-center px-4 py-3 bg-blue-700 rounded-lg text-white">
-            <i class="fas fa-tachometer-alt mr-3"></i>
-            Dashboard
-        </a>
-        <a href="{{ route('admin.siswa.index') }}" class="flex items-center px-4 py-3 text-blue-200 hover:bg-blue-700 rounded-lg transition duration-200">
-            <i class="fas fa-users mr-3"></i>
-            Manajemen Siswa
-        </a>
-        <a href="{{ route('admin.iduka.index') }}" class="flex items-center px-4 py-3 text-blue-200 hover:bg-blue-700 rounded-lg transition duration-200">
-            <i class="fas fa-building mr-3"></i>
-            Manajemen IDUKA
-        </a>
-        <a href="{{ route('admin.pendaftaran.index') }}" class="flex items-center px-4 py-3 text-blue-200 hover:bg-blue-700 rounded-lg transition duration-200">
-            <i class="fas fa-clipboard-list mr-3"></i>
-            Pendaftaran PKL
-        </a>
-        @if(Auth::guard('petugas')->user()->is_superadmin)
-            <a href="{{ route('admin.petugas.index') }}" class="flex items-center px-4 py-3 text-blue-200 hover:bg-blue-700 rounded-lg transition duration-200">
-                <i class="fas fa-user-shield mr-3"></i>
-                Manajemen Petugas
-            </a>
-        @endif
-    </div>
-</nav>
-        </div>
+@extends('layouts.admin')
 
-        <!-- Main Content -->
-        <div class="flex-1 flex flex-col overflow-hidden">
-            <!-- Header -->
-            <header class="bg-white shadow-sm border-b">
-                <div class="flex items-center justify-between p-4">
-                    <div class="flex items-center">
-                        <button @click="sidebarOpen = true" class="lg:hidden mr-4 text-gray-600">
-                            <i class="fas fa-bars text-xl"></i>
-                        </button>
-                        <h1 class="text-2xl font-semibold text-gray-800">Dashboard Admin</h1>
-                    </div>
-                    <div class="flex items-center space-x-4">
-                        <div class="text-right">
-                            <p class="font-medium text-gray-800">{{ Auth::guard('petugas')->user()->nama_lengkap }}</p>
-                            <p class="text-sm text-gray-600">{{ Auth::guard('petugas')->user()->jabatan ?? 'Petugas' }}</p>
-                        </div>
-                        <div class="relative">
-                            <button class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white">
-                                <i class="fas fa-user"></i>
-                            </button>
-                        </div>
-                        <form action="{{ route('admin.logout') }}" method="POST">
-                            @csrf
-                            <button type="submit" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition duration-200">
-                                <i class="fas fa-sign-out-alt mr-2"></i>Logout
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </header>
+@section('title', 'Dashboard Admin - Sistem Akademik')
+@section('header-title', 'Dashboard Admin')
 
-            <!-- Main Content Area -->
-            <main class="flex-1 overflow-y-auto p-6">
+@section('content')
                 <!-- Notifications -->
                 @if(session('success'))
                     <div class="mb-6 bg-green-50 border border-green-200 rounded-lg p-4">
@@ -174,8 +95,10 @@
                             
                             @if($pendaftaranTerbaru->count() > 0)
                                 <div class="mt-4 text-center">
-                                    <a href="#" class="text-blue-500 hover:text-blue-600 font-medium text-sm">
-                                        Lihat Semua Pendaftaran →
+                                    <a href="{{ route('admin.pendaftaran.index', ['status' => 'menunggu']) }}" 
+                                       class="inline-flex items-center text-blue-500 hover:text-blue-600 font-medium text-sm">
+                                        Lihat Semua Pendaftaran
+                                        <i class="fas fa-arrow-right ml-1"></i>
                                     </a>
                                 </div>
                             @endif
@@ -233,7 +156,6 @@
                 </div>
 
                 <!-- Quick Actions -->
-                <!-- Quick Actions -->
 <div class="mt-8 bg-white rounded-xl shadow-md border border-gray-200 p-6">
     <h2 class="text-lg font-semibold text-gray-800 mb-4">Aksi Cepat</h2>
     <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -262,19 +184,4 @@
         @endif
     </div>
 </div>
-            </main>
-        </div>
-    </div>
-
-    <!-- Overlay for mobile sidebar -->
-    <div x-show="sidebarOpen" @click="sidebarOpen = false" 
-         class="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
-         x-transition:enter="transition-opacity ease-linear duration-300"
-         x-transition:enter-start="opacity-0"
-         x-transition:enter-end="opacity-100"
-         x-transition:leave="transition-opacity ease-linear duration-300"
-         x-transition:leave-start="opacity-100"
-         x-transition:leave-end="opacity-0">
-    </div>
-</body>
-</html>
+@endsection

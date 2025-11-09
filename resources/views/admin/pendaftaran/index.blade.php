@@ -1,6 +1,8 @@
 @extends('layouts.admin')
 
 @section('title', 'Manajemen Pendaftaran PKL - Sistem Akademik')
+@section('header-title', 'Manajemen Petugas')
+
 
 @section('content')
 <div class="p-6">
