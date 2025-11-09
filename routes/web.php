@@ -10,14 +10,12 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PendaftaranController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 
 // ==================== ROUTES UNIVERSAL ====================
-Route::get('/', function () {
-    return view('home'); // This will be your beautiful homepage
-})->name('home');
-;
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 
 // ==================== ROUTES SISWA ====================

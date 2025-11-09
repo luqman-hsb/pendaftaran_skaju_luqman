@@ -636,107 +636,28 @@
         <div class="container mx-auto px-4 md:px-6">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
                 <div class="fade-in" x-intersect:enter="addVisibleClass($el)">
-                    <div class="text-4xl md:text-5xl font-bold mb-2" x-data="{ count: 0, target: 500 }" x-init="() => { let interval = setInterval(() => { if (count < target) { count += 10; } else { clearInterval(interval); } }, 20); }" x-text="count">0</div>
+                    <div class="text-4xl md:text-5xl font-bold mb-2" x-data="{ count: 0, target: {{ $stats['total_siswa'] }} }" x-init="() => { let interval = setInterval(() => { if (count < target) { count += Math.ceil(target / 50); } else { clearInterval(interval); } }, 20); }" x-text="count">0</div>
                     <p class="text-blue-100">Siswa Terdaftar</p>
                 </div>
-                
+
                 <div class="fade-in" x-intersect:enter="addVisibleClass($el)" x-intersect:enter.delay="100">
-                    <div class="text-4xl md:text-5xl font-bold mb-2" x-data="{ count: 0, target: 50 }" x-init="() => { let interval = setInterval(() => { if (count < target) { count += 1; } else { clearInterval(interval); } }, 50); }" x-text="count">0</div>
+                    <div class="text-4xl md:text-5xl font-bold mb-2" x-data="{ count: 0, target: {{ $stats['total_iduka'] }} }" x-init="() => { let interval = setInterval(() => { if (count < target) { count += Math.ceil(target / 50); } else { clearInterval(interval); } }, 50); }" x-text="count">0</div>
                     <p class="text-blue-100">Mitra Industri</p>
                 </div>
-                
+
                 <div class="fade-in" x-intersect:enter="addVisibleClass($el)" x-intersect:enter.delay="200">
-                    <div class="text-4xl md:text-5xl font-bold mb-2" x-data="{ count: 0, target: 300 }" x-init="() => { let interval = setInterval(() => { if (count < target) { count += 6; } else { clearInterval(interval); } }, 20); }" x-text="count">0</div>
+                    <div class="text-4xl md:text-5xl font-bold mb-2" x-data="{ count: 0, target: {{ $stats['pendaftaran_diterima'] }} }" x-init="() => { let interval = setInterval(() => { if (count < target) { count += Math.ceil(target / 50); } else { clearInterval(interval); } }, 20); }" x-text="count">0</div>
                     <p class="text-blue-100">Pendaftaran Disetujui</p>
                 </div>
-                
+
                 <div class="fade-in" x-intersect:enter="addVisibleClass($el)" x-intersect:enter.delay="300">
-                    <div class="text-4xl md:text-5xl font-bold mb-2" x-data="{ count: 0, target: 98 }" x-init="() => { let interval = setInterval(() => { if (count < target) { count += 1; } else { clearInterval(interval); } }, 30); }" x-text="count">0</div>
+                    <div class="text-4xl md:text-5xl font-bold mb-2" x-data="{ count: 0, target: {{ $stats['tingkat_kepuasan'] }} }" x-init="() => { let interval = setInterval(() => { if (count < target) { count += Math.ceil(target / 50); } else { clearInterval(interval); } }, 30); }" x-text="count">0</div>
                     <p class="text-blue-100">Tingkat Kepuasan</p>
                 </div>
             </div>
         </div>
     </section>
     
-    <!-- Registration CTA Section -->
-    <section id="daftar" class="py-20 bg-gray-50">
-        <div class="container mx-auto px-4 md:px-6">
-            <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden">
-                <div class="md:flex">
-                    <div class="md:w-1/2 gradient-bg p-8 md:p-12 text-white">
-                        <h2 class="text-3xl font-bold mb-4">Siap Memulai Pengalaman PKL Anda?</h2>
-                        <p class="mb-6 text-blue-100">
-                            Bergabunglah dengan ratusan siswa SMK SKAJU yang telah merasakan kemudahan pendaftaran PKL melalui sistem digital kami.
-                        </p>
-                        <ul class="space-y-3">
-                            <li class="flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                </svg>
-                                <span>Proses pendaftaran yang mudah dan cepat</span>
-                            </li>
-                            <li class="flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                </svg>
-                                <span>Akses ke berbagai mitra industri terpercaya</span>
-                            </li>
-                            <li class="flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                </svg>
-                                <span>Pantau status pendaftaran secara real-time</span>
-                            </li>
-                        </ul>
-                    </div>
-                    
-                    <div class="md:w-1/2 p-8 md:p-12">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Daftar Sekarang</h3>
-                        <p class="text-gray-600 mb-6">
-                            Isi formulir berikut untuk membuat akun siswa dan memulai proses pendaftaran PKL.
-                        </p>
-                        
-                        <form class="space-y-4">
-                            <div>
-                                <label for="nis" class="block text-sm font-medium text-gray-700 mb-1">NIS</label>
-                                <input type="text" id="nis" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-300" placeholder="Masukkan NIS Anda">
-                            </div>
-                            
-                            <div>
-                                <label for="nama" class="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap</label>
-                                <input type="text" id="nama" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-300" placeholder="Masukkan nama lengkap">
-                            </div>
-                            
-                            <div>
-                                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                                <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-300" placeholder="Masukkan alamat email">
-                            </div>
-                            
-                            <div>
-                                <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
-                                <input type="password" id="password" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-300" placeholder="Buat password">
-                            </div>
-                            
-                            <div class="flex items-center">
-                                <input type="checkbox" id="agree" class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
-                                <label for="agree" class="ml-2 text-sm text-gray-600">
-                                    Saya menyetujui <a href="#" class="text-blue-600 hover:underline">syarat dan ketentuan</a>
-                                </label>
-                            </div>
-                            
-                            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-medium transition-colors duration-300 transform hover:-translate-y-1 shadow-md hover:shadow-lg">
-                                Daftar Sekarang
-                            </button>
-                            
-                            <p class="text-center text-sm text-gray-600">
-                                Sudah punya akun? <a href="/login" class="text-blue-600 font-medium hover:underline">Masuk di sini</a>
-                            </p>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
     
     <!-- FAQ Section -->
     <section class="py-20 bg-white">
