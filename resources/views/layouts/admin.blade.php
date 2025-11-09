@@ -104,8 +104,8 @@
                     </a>
 
                     <!-- Petugas (hanya superadmin) -->
-                    @if(Auth::guard('petugas')->user()->is_superadmin)
-                        <a href="{{ route('admin.petugas.index') }}" 
+                    @if(Auth::guard('petugas')->check() && Auth::guard('petugas')->user()->is_superadmin)
+                        <a href="{{ route('admin.petugas.index') }}"
                            class="flex items-center px-4 py-3 rounded-lg transition duration-200 {{ request()->routeIs('admin.petugas.*') ? 'nav-item-active' : 'nav-item-inactive' }}">
                             <i class="fas fa-user-shield mr-3"></i>
                             Manajemen Petugas
@@ -127,21 +127,23 @@
                         <h1 class="text-2xl font-semibold text-gray-800">@yield('header-title', 'Admin Panel')</h1>
                     </div>
                     <div class="flex items-center space-x-4">
-                        <div class="text-right">
-                            <p class="font-medium text-gray-800">{{ Auth::guard('petugas')->user()->nama_lengkap }}</p>
-                            <p class="text-sm text-gray-600">{{ Auth::guard('petugas')->user()->jabatan ?? 'Petugas' }}</p>
-                        </div>
-                        <div class="relative">
-                            <button class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white">
-                                <i class="fas fa-user"></i>
-                            </button>
-                        </div>
-                        <form action="{{ route('admin.logout') }}" method="POST">
-                            @csrf
-                            <button type="submit" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition duration-200">
-                                <i class="fas fa-sign-out-alt mr-2"></i>Logout
-                            </button>
-                        </form>
+                        @if(Auth::guard('petugas')->check())
+                            <div class="text-right">
+                                <p class="font-medium text-gray-800">{{ Auth::guard('petugas')->user()->nama_lengkap }}</p>
+                                <p class="text-sm text-gray-600">{{ Auth::guard('petugas')->user()->jabatan ?? 'Petugas' }}</p>
+                            </div>
+                            <div class="relative">
+                                <button class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white">
+                                    <i class="fas fa-user"></i>
+                                </button>
+                            </div>
+                            <form action="{{ route('admin.logout') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition duration-200">
+                                    <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                                </button>
+                            </form>
+                        @endif
                     </div>
                 </div>
             </header>

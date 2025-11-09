@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.admin_auth')
 
 @section('title', 'Login Petugas - Sistem Akademik')
 

@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title', 'Manajemen Pendaftaran PKL - Sistem Akademik')
-@section('header-title', 'Manajemen Petugas')
+@section('header-title', 'Manajemen Pendaftaran')
 
 
 @section('content')
@@ -9,9 +9,7 @@
     <!-- Header dengan Back to Dashboard -->
     <div class="flex items-center justify-between mb-6">
         <div class="flex items-center">
-            <a href="{{ route('admin.dashboard') }}" class="flex items-center text-blue-500 hover:text-blue-600 mr-4 transition duration-200">
-                <i class="fas fa-arrow-left mr-2"></i> Back to Dashboard
-            </a>
+            
             <h1 class="text-2xl font-bold text-gray-800">Manajemen Pendaftaran PKL</h1>
         </div>
     </div>

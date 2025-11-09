@@ -171,7 +171,7 @@
             <i class="fas fa-users text-purple-500 text-xl mb-2"></i>
             <p class="font-medium text-purple-800">Data Siswa</p>
         </a>
-        @if(Auth::guard('petugas')->user()->is_superadmin)
+        @if(Auth::guard('petugas')->check() && Auth::guard('petugas')->user()->is_superadmin)
             <a href="{{ route('admin.petugas.index') }}" class="bg-orange-50 border border-orange-200 rounded-lg p-4 text-center hover:bg-orange-100 transition duration-200">
                 <i class="fas fa-user-shield text-orange-500 text-xl mb-2"></i>
                 <p class="font-medium text-orange-800">Manajemen Petugas</p>
