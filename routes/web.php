@@ -12,9 +12,16 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PendaftaranController;
 use Illuminate\Support\Facades\Route;
 
+
+// ==================== ROUTES UNIVERSAL ====================
+Route::get('/', function () {
+    return view('home'); // This will be your beautiful homepage
+})->name('home');
+;
+
+
 // ==================== ROUTES SISWA ====================
 // Auth Routes Siswa
-Route::get('/', [AuthController::class, 'showLogin'])->name('login');
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login.form');
 Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register.form');
