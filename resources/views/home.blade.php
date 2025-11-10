@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pendaftaran PKL SKAJU - Sistem Pendaftaran Praktik Kerja Lapangan</title>
+    <title>Pendaftaran Luqman's PKL - Sistem Pendaftaran Praktik Kerja Lapangan</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -128,7 +128,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                         </svg>
                     </div>
-                    <span class="text-xl font-bold gradient-text">PKL SKAJU</span>
+                    <span class="text-xl font-bold gradient-text">Luqman's PKL</span>
                 </div>
                 
                 <div class="hidden md:flex items-center space-x-8">
@@ -136,7 +136,6 @@
                     <a href="#tentang" class="text-gray-600 hover:text-blue-600 font-medium transition-colors duration-300">Tentang</a>
                     <a href="#fitur" class="text-gray-600 hover:text-blue-600 font-medium transition-colors duration-300">Fitur</a>
                     <a href="#cara-kerja" class="text-gray-600 hover:text-blue-600 font-medium transition-colors duration-300">Cara Kerja</a>
-                    <a href="#daftar" class="text-gray-600 hover:text-blue-600 font-medium transition-colors duration-300">Daftar</a>
                 </div>
                 
                 <div class="flex items-center space-x-4">
@@ -189,10 +188,10 @@
                 <div class="md:w-1/2 mb-10 md:mb-0 fade-in" x-intersect:enter="addVisibleClass($el)">
                     <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
                         Sistem Pendaftaran 
-                        <span class="gradient-text">PKL SKAJU</span>
+                        <span class="gradient-text">Luqman's PKL</span>
                     </h1>
                     <p class="text-lg md:text-xl text-gray-600 mb-8 max-w-lg">
-                        Platform digital modern untuk memudahkan proses pendaftaran Praktik Kerja Lapangan siswa SMK SKAJU. Daftar, pilih mitra industri, dan kelola PKL dengan mudah.
+                        Platform digital modern untuk memudahkan proses pendaftaran Praktik Kerja Lapangan siswa SMK Negeri 7 Batam. Daftar, pilih mitra industri, dan kelola PKL dengan mudah.
                     </p>
                     <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
                         <a href="/register" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium text-center transition-all duration-300 transform hover:-translate-y-1 shadow-md hover:shadow-lg">
@@ -261,9 +260,9 @@
     <section id="tentang" class="py-20 bg-white">
         <div class="container mx-auto px-4 md:px-6">
             <div class="text-center mb-16 fade-in" x-intersect:enter="addVisibleClass($el)">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Tentang Sistem PKL SKAJU</h2>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Tentang Sistem Luqman's PKL</h2>
                 <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-                    Platform digital yang dirancang khusus untuk mempermudah proses pendaftaran dan pengelolaan Praktik Kerja Lapangan bagi siswa SMK SKAJU.
+                    Platform digital yang dirancang khusus untuk mempermudah proses pendaftaran dan pengelolaan Praktik Kerja Lapangan bagi siswa SMK Negeri 7 Batam.
                 </p>
             </div>
             
@@ -665,7 +664,7 @@
             <div class="text-center mb-16 fade-in" x-intersect:enter="addVisibleClass($el)">
                 <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Pertanyaan Umum</h2>
                 <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-                    Temukan jawaban untuk pertanyaan yang sering diajukan tentang sistem pendaftaran PKL SKAJU.
+                    Temukan jawaban untuk pertanyaan yang sering diajukan tentang sistem pendaftaran Luqman's PKL.
                 </p>
             </div>
             
@@ -686,7 +685,7 @@
                              x-transition:leave-start="opacity-100 transform translate-y-0" 
                              x-transition:leave-end="opacity-0 transform -translate-y-4" 
                              class="mt-4 text-gray-600" x-cloak>
-                            <p>Sistem pendaftaran PKL SKAJU ditujukan untuk semua siswa SMK SKAJU yang akan melaksanakan Praktik Kerja Lapangan. Siswa dapat mendaftar dengan menggunakan NIS yang valid.</p>
+                            <p>Sistem pendaftaran Luqman's PKL ditujukan untuk semua siswa SMK Negeri 7 Batam yang akan melaksanakan Praktik Kerja Lapangan. Siswa dapat mendaftar dengan menggunakan NIS yang valid.</p>
                         </div>
                     </div>
                     
@@ -791,10 +790,10 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                             </svg>
                         </div>
-                        <span class="text-xl font-bold">PKL SKAJU</span>
+                        <span class="text-xl font-bold">Luqman's PKL</span>
                     </div>
                     <p class="text-gray-400 mb-4 max-w-md">
-                        Sistem Pendaftaran Praktik Kerja Lapangan SMK SKAJU. Platform digital untuk memudahkan proses pendaftaran dan pengelolaan PKL siswa.
+                        Sistem Pendaftaran Praktik Kerja Lapangan SMK Negeri 7 Batam. Platform digital untuk memudahkan proses pendaftaran dan pengelolaan PKL siswa.
                     </p>
                     <div class="flex space-x-4">
                         <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
@@ -853,7 +852,7 @@
             </div>
             
             <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-                <p>&copy; 2023 Pendaftaran PKL SKAJU. Seluruh hak cipta dilindungi.</p>
+                <p>&copy; 2023 Pendaftaran Luqman's PKL. Seluruh hak cipta dilindungi.</p>
             </div>
         </div>
     </footer>
