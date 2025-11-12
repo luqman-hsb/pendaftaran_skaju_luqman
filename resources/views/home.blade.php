@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <style>
         :root {
             --primary: #3b82f6;
@@ -26,11 +27,11 @@
         }
         
         .gradient-bg {
-            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #10b981 100%);
+            background: #2563eb; /* blue-600 */
         }
         
         .gradient-text {
-            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #10b981 100%);
+            background: #2563eb; /* blue-600 */
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -124,9 +125,10 @@
             <div class="flex justify-between items-center">
                 <div class="flex items-center space-x-2">
                     <div class="w-10 h-10 rounded-lg gradient-bg flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                        </svg>
+                        {{-- <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"> --}}
+                            {{-- <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /> --}}
+                        {{-- </svg> --}}
+                        <i class="fa-solid fa-graduation-cap h-5 w-5 text-white"></i>
                     </div>
                     <span class="text-xl font-bold gradient-text">Luqman's PKL</span>
                 </div>
@@ -178,8 +180,8 @@
         <!-- Background elements -->
         <div class="absolute top-0 left-0 w-full h-full z-0">
             <div class="absolute top-10 left-10 w-20 h-20 rounded-full bg-blue-100 opacity-50 floating"></div>
-            <div class="absolute top-40 right-20 w-16 h-16 rounded-full bg-green-100 opacity-50 floating" style="animation-delay: 1s;"></div>
-            <div class="absolute bottom-20 left-1/4 w-24 h-24 rounded-full bg-purple-100 opacity-50 floating" style="animation-delay: 2s;"></div>
+            <div class="absolute top-40 right-20 w-16 h-16 rounded-full bg-blue-100 opacity-50 floating" style="animation-delay: 1s;"></div>
+            <div class="absolute bottom-20 left-1/4 w-24 h-24 rounded-full bg-blue-100 opacity-50 floating" style="animation-delay: 2s;"></div>
             <div class="absolute bottom-40 right-1/4 w-12 h-12 rounded-full bg-blue-100 opacity-50 floating" style="animation-delay: 1.5s;"></div>
         </div>
         
@@ -220,8 +222,8 @@
                         <!-- Floating elements around the main circle -->
                         <div class="absolute -top-4 -left-4 bg-white p-4 rounded-xl shadow-lg card-hover">
                             <div class="flex items-center space-x-2">
-                                <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                                     </svg>
                                 </div>
@@ -242,8 +244,8 @@
                         
                         <div class="absolute top-1/2 -left-12 bg-white p-4 rounded-xl shadow-lg card-hover">
                             <div class="flex items-center space-x-2">
-                                <div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                                     </svg>
                                 </div>
@@ -268,7 +270,7 @@
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                 <div class="fade-in" x-intersect:enter="addVisibleClass($el)">
-                    <div class="bg-gradient-to-br from-blue-50 to-green-50 rounded-2xl p-8 shadow-lg">
+                    <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-8 shadow-lg">
                         <h3 class="text-2xl font-bold text-gray-900 mb-4">Mengapa Memilih Sistem Kami?</h3>
                         <ul class="space-y-4">
                             <li class="flex items-start">
@@ -280,24 +282,24 @@
                                 <p class="text-gray-700">Proses pendaftaran yang sederhana dan mudah dipahami oleh siswa</p>
                             </li>
                             <li class="flex items-start">
-                                <div class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center mt-1 mr-3 flex-shrink-0">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <div class="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center mt-1 mr-3 flex-shrink-0">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                                     </svg>
                                 </div>
                                 <p class="text-gray-700">Akses ke berbagai mitra industri terpercaya dan berkualitas</p>
                             </li>
                             <li class="flex items-start">
-                                <div class="w-6 h-6 rounded-full bg-purple-100 flex items-center justify-center mt-1 mr-3 flex-shrink-0">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <div class="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center mt-1 mr-3 flex-shrink-0">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                                     </svg>
                                 </div>
                                 <p class="text-gray-700">Pantau status pendaftaran secara real-time kapan saja dan di mana saja</p>
                             </li>
                             <li class="flex items-start">
-                                <div class="w-6 h-6 rounded-full bg-yellow-100 flex items-center justify-center mt-1 mr-3 flex-shrink-0">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <div class="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center mt-1 mr-3 flex-shrink-0">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                                     </svg>
                                 </div>
@@ -319,22 +321,22 @@
                         </div>
                         
                         <div>
-                            <h4 class="text-lg font-semibold text-green-600 mb-2">Misi</h4>
+                            <h4 class="text-lg font-semibold text-blue-600 mb-2">Misi</h4>
                             <ul class="space-y-2 text-gray-700">
                                 <li class="flex items-start">
                                     <span class="text-blue-500 mr-2">•</span>
                                     <span>Menyederhanakan proses pendaftaran PKL bagi siswa</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <span class="text-green-500 mr-2">•</span>
+                                    <span class="text-blue-500 mr-2">•</span>
                                     <span>Memperluas jaringan mitra industri yang berkualitas</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <span class="text-purple-500 mr-2">•</span>
+                                    <span class="text-blue-500 mr-2">•</span>
                                     <span>Meningkatkan transparansi dalam proses seleksi dan penempatan</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <span class="text-yellow-500 mr-2">•</span>
+                                    <span class="text-blue-500 mr-2">•</span>
                                     <span>Mendukung pengembangan kompetensi siswa sesuai kebutuhan industri</span>
                                 </li>
                             </ul>
@@ -369,19 +371,19 @@
                     </p>
                     <ul class="space-y-2 text-gray-700">
                         <li class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                             </svg>
                             <span>Registrasi akun mudah</span>
                         </li>
                         <li class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                             </svg>
                             <span>Kelola profil pribadi</span>
                         </li>
                         <li class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                             </svg>
                             <span>Akses mitra industri terpercaya</span>
@@ -402,19 +404,19 @@
                     </p>
                     <ul class="space-y-2 text-gray-700">
                         <li class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                             </svg>
                             <span>Kelola data siswa & IDUKA</span>
                         </li>
                         <li class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                             </svg>
                             <span>Tinjau & verifikasi pendaftaran</span>
                         </li>
                         <li class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                             </svg>
                             <span>Pantau kuota & penempatan</span>
@@ -436,19 +438,19 @@
                     </p>
                     <ul class="space-y-2 text-gray-700">
                         <li class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                             </svg>
                             <span>Login terpisah siswa & petugas</span>
                         </li>
                         <li class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                             </svg>
                             <span>Hak akses sesuai peran</span>
                         </li>
                         <li class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                             </svg>
                             <span>Keamanan data terjamin</span>
@@ -469,19 +471,19 @@
                     </p>
                     <ul class="space-y-2 text-gray-700">
                         <li class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                             </svg>
                             <span>Update data pribadi</span>
                         </li>
                         <li class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                             </svg>
                             <span>Ubah informasi kontak</span>
                         </li>
                         <li class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                             </svg>
                             <span>Kelola preferensi notifikasi</span>
@@ -502,19 +504,19 @@
                     </p>
                     <ul class="space-y-2 text-gray-700">
                         <li class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                             </svg>
                             <span>Lihat riwayat pendaftaran</span>
                         </li>
                         <li class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                             </svg>
                             <span>Pantau status real-time</span>
                         </li>
                         <li class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                             </svg>
                             <span>Terima notifikasi update</span>
@@ -535,19 +537,19 @@
                     </p>
                     <ul class="space-y-2 text-gray-700">
                         <li class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                             </svg>
                             <span>Laravel 10 Framework</span>
                         </li>
                         <li class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                             </svg>
                             <span>Database MySQL</span>
                         </li>
                         <li class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                             </svg>
                             <span>Antarmuka responsif</span>
@@ -570,7 +572,7 @@
             
             <div class="relative">
                 <!-- Timeline line -->
-                <div class="hidden md:block absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-green-500 transform -translate-y-1/2 z-0"></div>
+                <div class="hidden md:block absolute top-1/2 left-0 right-0 h-1 bg-blue-600 transform -translate-y-1/2 z-0"></div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative z-10">
                     <!-- Step 1 -->
@@ -631,7 +633,7 @@
     </section>
     
     <!-- Stats Section -->
-    <section class="py-16 gradient-bg text-white">
+    <section class="py-16 bg-blue-600 text-white">
         <div class="container mx-auto px-4 md:px-6">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
                 <div class="fade-in" x-intersect:enter="addVisibleClass($el)">
@@ -728,7 +730,7 @@
                     </div>
                     
                     <!-- FAQ 4 -->
-                    <div class="bg-gray-50 rounded-xl p-6 fade-in" x-intersect:enter="addVisibleClass($el)" x-intersect:enter.delay="300">
+                    {{-- <div class="bg-gray-50 rounded-xl p-6 fade-in" x-intersect:enter="addVisibleClass($el)" x-intersect:enter.delay="300">
                         <button @click="faq4 = !faq4" class="flex justify-between items-center w-full text-left">
                             <h3 class="text-lg font-semibold text-gray-900">Apa yang harus dilakukan jika lupa password?</h3>
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 transition-transform duration-300" :class="{'rotate-180': faq4}" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -744,7 +746,7 @@
                              class="mt-4 text-gray-600" x-cloak>
                             <p>Pada halaman login, klik tautan "Lupa Password" dan ikuti instruksi untuk mereset password Anda. Sistem akan mengirimkan link reset password ke email yang terdaftar. Pastikan Anda memiliki akses ke email tersebut.</p>
                         </div>
-                    </div>
+                    </div> --}}
                     
                     <!-- FAQ 5 -->
                     <div class="bg-gray-50 rounded-xl p-6 fade-in" x-intersect:enter="addVisibleClass($el)" x-intersect:enter.delay="400">
@@ -766,7 +768,7 @@
                     </div>
                 </div>
                 
-                <div class="text-center mt-12 fade-in" x-intersect:enter="addVisibleClass($el)">
+                {{-- <div class="text-center mt-12 fade-in" x-intersect:enter="addVisibleClass($el)">
                     <p class="text-gray-600 mb-4">Masih punya pertanyaan?</p>
                     <a href="mailto:pkl@sekolah.sch.id" class="inline-flex items-center text-blue-600 font-medium hover:underline">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -774,7 +776,7 @@
                         </svg>
                         Hubungi Administrator
                     </a>
-                </div>
+                </div> --}}
             </div>
         </div>
     </section>
