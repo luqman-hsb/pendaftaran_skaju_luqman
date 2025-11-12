@@ -9,11 +9,30 @@ use Illuminate\Support\Facades\Auth;
 
 class PendaftaranController extends Controller
 {
-    // Show list of iduka for registration
-    public function showDaftarPKL()
+    // Show list of iduka for registration with search and filter
+    public function showDaftarPKL(Request $request)
     {
-        $idukaList = Iduka::where('kuota', '>', 0)->get();
-        return view('pendaftaran.daftar', compact('idukaList'));
+        $query = Iduka::where('kuota', '>', 0);
+        
+        // Search functionality
+        if ($request->has('search') && !empty($request->search)) {
+            $searchTerm = $request->search;
+            $query->where(function($q) use ($searchTerm) {
+                $q->where('nama_iduka', 'like', "%{$searchTerm}%")
+                  ->orWhere('alamat', 'like', "%{$searchTerm}%")
+                  ->orWhere('bidang_usaha', 'like', "%{$searchTerm}%");
+            });
+        }
+        
+        // Filter by bidang_usaha
+        if ($request->has('bidang_usaha') && !empty($request->bidang_usaha)) {
+            $query->where('bidang_usaha', $request->bidang_usaha);
+        }
+        
+        $idukaList = $query->get();
+        $bidangUsahaOptions = Iduka::distinct()->whereNotNull('bidang_usaha')->pluck('bidang_usaha');
+        
+        return view('pendaftaran.daftar', compact('idukaList', 'bidangUsahaOptions'));
     }
 
     // Show registration form for specific iduka

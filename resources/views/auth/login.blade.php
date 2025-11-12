@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Login Siswa - Sistem Akademik')
+@section('title', 'Login Siswa - Luqman\'s PKL')
 
 @section('content')
 <div x-data="loginForm()" class="min-h-screen flex items-center justify-center p-4">
@@ -19,7 +19,7 @@
                 <i class="fas fa-graduation-cap text-2xl text-white"></i>
             </div>
             <h2 class="text-3xl font-bold text-gray-800">Masuk ke Sistem</h2>
-            <p class="mt-3 text-gray-600">Sistem Informasi Akademik Siswa</p>
+            <p class="mt-3 text-gray-600">Sistem Pendaftaran Praktik Kerja Lapangan</p>
         </div>
 
         <!-- Login Form -->
@@ -104,7 +104,7 @@
         <!-- Footer -->
         <div class="text-center">
             <p class="text-gray-500 text-sm">
-                &copy; 2024 Sistem Akademik. All rights reserved.
+                &copy; 2024 Luqman's PKL. All rights reserved.
             </p>
         </div>
     </div>

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Registrasi Siswa - Sistem Akademik')
+@section('title', 'Registrasi Siswa - Luqman\'s PKL')
 
 @section('content')
 <div x-data="registerForm()" class="min-h-screen flex items-center justify-center p-4 py-8">
@@ -15,10 +15,10 @@
         <!-- Header -->
         <div class="text-center fade-in">
             <div class="mx-auto w-20 h-20 bg-gradient-to-r from-green-400 to-blue-500 rounded-full flex items-center justify-center mb-6 shadow-lg">
-                <i class="fas fa-user-plus text-2xl text-white"></i>
+                <i class="fas fa-graduation-cap text-2xl text-white"></i>
             </div>
             <h2 class="text-3xl font-bold text-gray-800">Registrasi Siswa Baru</h2>
-            <p class="mt-3 text-gray-600">Lengkapi data diri Anda untuk bergabung</p>
+            <p class="mt-3 text-gray-600">Lengkapi data diri Anda untuk bergabung dengan sistem PKL</p>
         </div>
 
         <!-- Register Form -->
@@ -263,7 +263,7 @@
         <!-- Footer -->
         <div class="text-center">
             <p class="text-gray-500 text-sm">
-                &copy; 2024 Sistem Akademik. All rights reserved.
+                &copy; 2024 Luqman's PKL. All rights reserved.
             </p>
         </div>
     </div>
