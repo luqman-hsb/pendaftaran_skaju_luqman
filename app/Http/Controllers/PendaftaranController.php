@@ -60,32 +60,40 @@ class PendaftaranController extends Controller
     public function store(Request $request, Iduka $iduka)
     {
         \Log::info('Store method called', [
-        'siswa_id' => Auth::id(),
-        'iduka_id' => $iduka->id,
-        'iduka_name' => $iduka->nama_iduka,
-        'request_data' => $request->all()
+            'siswa_id' => Auth::id(),
+            'iduka_id' => $iduka->id,
+            'iduka_name' => $iduka->nama_iduka,
+            'request_data' => $request->all()
         ]);
 
-    // Check if student already has active PKL
+        // Validate terms agreement
+        $request->validate([
+            'agreeTerms' => 'required|accepted'
+        ], [
+            'agreeTerms.required' => 'Anda harus menyetujui persyaratan pendaftaran.',
+            'agreeTerms.accepted' => 'Anda harus menyetujui persyaratan pendaftaran.'
+        ]);
+
+        // Check if student already has active PKL
         if (Auth::user()->hasActivePKL()) {
             \Log::warning('Student already has active PKL', ['siswa_id' => Auth::id()]);
             return redirect()->route('dashboard')->with('error', 'Anda sudah memiliki PKL aktif.');
         }
 
-    // Check if student already has pending registration for any iduka
+        // Check if student already has pending registration for any iduka
         $existingRegistration = Pendaftaran::where('siswa_id', Auth::id())
-        ->where('status', 'menunggu')
-        ->first();
+            ->where('status', 'menunggu')
+            ->first();
 
         if ($existingRegistration) {
             \Log::warning('Student has pending registration', [
-            'siswa_id' => Auth::id(),
-            'existing_id' => $existingRegistration->id
+                'siswa_id' => Auth::id(),
+                'existing_id' => $existingRegistration->id
             ]);
             return redirect()->route('dashboard')->with('info', 'Anda sudah memiliki pendaftaran yang sedang menunggu persetujuan.');
         }
 
-    // Check if IDUKA still has quota
+        // Check if IDUKA still has quota
         if ($iduka->kuota <= 0) {
             \Log::warning('IDUKA quota full', ['iduka_id' => $iduka->id]);
             return redirect()->route('pkl.daftar')->with('error', 'Kuota IDUKA ini sudah penuh.');
@@ -95,13 +103,13 @@ class PendaftaranController extends Controller
             \Log::info('Creating registration...');
 
             $pendaftaran = Pendaftaran::create([
-            'siswa_id' => Auth::id(),
-            'iduka_id' => $iduka->id,
-            'tanggal_daftar' => now()->format('Y-m-d'),
-            'status' => 'menunggu',
-            'tanggal_berlaku' => null,
-            'petugas_id' => null,
-            'catatan_penolakan' => null,
+                'siswa_id' => Auth::id(),
+                'iduka_id' => $iduka->id,
+                'tanggal_daftar' => now()->format('Y-m-d'),
+                'status' => 'menunggu',
+                'tanggal_berlaku' => null,
+                'petugas_id' => null,
+                'catatan_penolakan' => null,
             ]);
 
             \Log::info('Registration created successfully', ['pendaftaran_id' => $pendaftaran->id]);
@@ -109,7 +117,7 @@ class PendaftaranController extends Controller
             return redirect()->route('dashboard')->with('success', 'Pendaftaran PKL berhasil dikirim! Menunggu persetujuan petugas.');
         } catch (\Exception $e) {
             \Log::error('Error creating registration: ' . $e->getMessage(), [
-            'trace' => $e->getTraceAsString()
+                'trace' => $e->getTraceAsString()
             ]);
 
             return redirect()->back()->with('error', 'Terjadi kesalahan saat mengirim pendaftaran: ' . $e->getMessage());
