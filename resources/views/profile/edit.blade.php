@@ -6,6 +6,7 @@
     <title>Edit Profil - Luqman's PKL</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
 </head>
 <body class="bg-gray-50 min-h-screen">
     <!-- Navigation -->
