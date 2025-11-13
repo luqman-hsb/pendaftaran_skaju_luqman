@@ -50,4 +50,14 @@ class ProfileController extends Controller
 
         return redirect()->route('dashboard')->with('success', 'Profil berhasil diperbarui.');
     }
+
+    // Delete account
+    public function destroy(Request $request)
+    {
+        $siswa = Auth::user();
+        $siswa->delete();
+        Auth::logout();
+
+        return redirect('/')->with('success', 'Akun berhasil dihapus.');
+    }
 }

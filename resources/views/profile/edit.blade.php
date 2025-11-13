@@ -7,6 +7,40 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const deleteBtn = document.getElementById('delete-account-btn');
+            const deleteWarning = document.getElementById('delete-warning');
+            const deleteForm = document.getElementById('delete-form');
+            let countdown = 30;
+            let timer;
+
+            deleteBtn.addEventListener('click', function() {
+                if (deleteBtn.textContent.includes('Konfirmasi') && !deleteBtn.disabled) {
+                    // Second click: submit the form
+                    deleteForm.submit();
+                } else {
+                    // First click: start countdown
+                    deleteBtn.disabled = true;
+                    deleteBtn.textContent = 'Konfirmasi (' + countdown + ')';
+                    deleteBtn.classList.add('bg-gray-500', 'hover:bg-gray-600');
+                    deleteWarning.classList.remove('hidden');
+
+                    timer = setInterval(function() {
+                        countdown--;
+                        deleteBtn.textContent = 'Konfirmasi (' + countdown + ')';
+                        if (countdown <= 0) {
+                            clearInterval(timer);
+                            deleteBtn.disabled = false;
+                            deleteBtn.textContent = 'Konfirmasi Hapus Akun';
+                            deleteBtn.classList.remove('bg-gray-500', 'hover:bg-gray-600');
+                            deleteBtn.classList.add('bg-red-700', 'hover:bg-red-800');
+                        }
+                    }, 1000);
+                }
+            });
+        });
+    </script>
 </head>
 <body class="bg-gray-50 min-h-screen">
     <!-- Navigation -->
@@ -181,11 +215,15 @@
                         <p class="text-red-700">Hapus akun secara permanen</p>
                         <p class="text-sm text-red-600">Tindakan ini tidak dapat dibatalkan. Semua data Anda akan dihapus.</p>
                     </div>
-                    <button class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition duration-200 opacity-50 cursor-not-allowed" disabled>
+                    <button id="delete-account-btn" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition duration-200">
                         <i class="fas fa-trash mr-2"></i>Hapus Akun
                     </button>
                 </div>
-                <p class="text-sm text-gray-500 mt-2">Fitur penghapusan akun sedang dalam pengembangan.</p>
+                <p id="delete-warning" class="text-sm text-gray-500 mt-2 hidden">Menunggu 30 detik sebelum konfirmasi diaktifkan...</p>
+                <form id="delete-form" action="{{ route('profile.destroy') }}" method="POST" class="hidden">
+                    @csrf
+                    @method('DELETE')
+                </form>
             </div>
         </div>
     </div>
